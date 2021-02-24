@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const MenuSchema = new mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User',
-    },
+   tiffinservice:{
+    type: mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref:'Tiffin'
+   },
     veg_name:{
         type:String
     },
