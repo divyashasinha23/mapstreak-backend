@@ -11,6 +11,7 @@ const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate=require("mongoose-findorcreate");
 const User =require('./models/User');
+const TiffinRoute = require('./routes/TiffinRoute');
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(UserRoute);
+app.use(TiffinRoute);
 
 
 
@@ -133,8 +135,7 @@ passport.use(new facebookStrategy({
   }); 
 
 
-app.get('/', (req,res) => {
-    res.send('server running..');
+app.get('/', function(req,res) {
 });
 
 
