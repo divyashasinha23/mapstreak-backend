@@ -149,7 +149,7 @@ passport.use(new facebookStrategy({
   
   app.post('/verification', (req, res) => {
     // do a validation
-    const secret = '12345678'
+    const secret = 'secret12'
   
     console.log(req.body)
   

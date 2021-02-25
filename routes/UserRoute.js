@@ -7,7 +7,7 @@ const authRequire = require('../Middleware/ForgetPasswordMiddleware');
 router.post('/login',UserController.post_login);
 router.post('/signup',UserController.post_signup);
 router.post('/forgot-password',UserController.post_forgotpassword);
-router.post('/reset-password', authRequire ,UserController.post_resetpassword);
+router.post('/reset-password', authRequire, UserController.post_resetpassword);
 
 
 module.exports = router;
