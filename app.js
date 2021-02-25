@@ -11,6 +11,8 @@ const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate=require("mongoose-findorcreate");
 const User =require('./models/User');
+const MerchantRoute=require('./routes/MerchantRoute');
+const Merchant=require('./models/merchantModel')
 const TiffinRoute = require('./routes/TiffinRoute');
 
 
@@ -23,6 +25,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(UserRoute);
+app.use(MerchantRoute);
 app.use(TiffinRoute);
 
 
@@ -86,7 +89,7 @@ passport.use(new facebookStrategy({
               return done(null, user); // user found, return that user
           } else {
               // if there is no user found with that facebook id, create them
-              var newUser            = new User();
+              var newUser = new User();
   
               // set all of the facebook information in our user model
               newUser.uid    = profile.id; // set the users facebook id                   
@@ -135,8 +138,7 @@ passport.use(new facebookStrategy({
   }); 
 
 
-app.get('/', function(req,res) {
-});
+
 
 
 
