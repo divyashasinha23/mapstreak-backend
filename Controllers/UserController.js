@@ -4,7 +4,13 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 
 //create token
@@ -111,7 +117,7 @@ module.exports.post_forgotpassword = async(req,res) =>{
       if(!user){
         res.json({message: "This email id does not exists"});
       }
-     const token = createToken({_id: user._id});  
+     const token = createToken(user._id);  
      var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -134,7 +140,7 @@ module.exports.post_forgotpassword = async(req,res) =>{
             if (error) {
               console.log(error);
             } else {
-              console.log('Email sent: ' + info.response);
+              res.json({msg: "Re-send password, check your email"})
             }
           });
         }
@@ -145,18 +151,18 @@ module.exports.post_forgotpassword = async(req,res) =>{
 
 
 
-module.exports.post_resetpassword = async(req,res) => {
-  try{
-  const {newPassword} = req.body;
-  const passwordHash = await bcrypt.hash(newPassword, 12)
+      module.exports.post_resetpassword = async(req,res) => {
+        try{
+        const {newPassword} = req.body;
+        const passwordHash = await bcrypt.hash(newPassword, 12)
 
-  await User.findOneAndUpdate({_id: req.user.id},{
-    password: passwordHash
-  });
-  res.json({message: "password succesfully changed"});
-}
-catch(err){
-  console.log(err);
-}
-
-}
+        await User.findOneAndUpdate({_id: req.user.id},{
+          password: passwordHash
+        });
+        res.json({message: "password succesfully changed"});
+      }
+      catch(err){
+        console.log(err);
+      }
+      
+      }
