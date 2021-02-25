@@ -140,11 +140,6 @@ passport.use(new facebookStrategy({
   }); 
 
 
-
-
-
-
-
 PORT= process.env.PORT;
 
 app.listen(PORT, ()=> console.log(`Server started at ${PORT}`));

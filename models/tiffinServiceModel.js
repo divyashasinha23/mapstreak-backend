@@ -37,7 +37,7 @@ const tiffinSchema = new mongoose.Schema
  },
 });
 
-//Geocoder and create location field
+//Geocoder 
 tiffinSchema.pre('save', async function(next) {
  const loc = await geocoder.geocode(this.address);
  this.location = {
@@ -46,7 +46,6 @@ tiffinSchema.pre('save', async function(next) {
      formattedAddress: loc[0].formattedAddress,
      street: loc[0].streetName,
      city: loc[0].city,
-     state: loc[0].stateCode,
      zipcode: loc[0].zipcode,
      country: loc[0].countryCode
  }
