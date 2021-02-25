@@ -54,11 +54,6 @@ return errors;
 
 
 //signup
-module.exports.merchant_get_signup = async (req,res)=>
-{
-  res.render('merchant_signup');
-}
-
 
 module.exports.merchant_post_signup = async(req,res)=>
 {
@@ -95,9 +90,7 @@ module.exports.merchant_post_signup = async(req,res)=>
 
 
 //login
-module.exports.merchant_get_login = async(req,res) => {
- res.render('merchant_login');
-}
+
 
 module.exports.merchant_post_login = async (req,res) => {
   const {mobile_no, password} = req.body;
@@ -118,6 +111,3 @@ module.exports.merchant_post_login = async (req,res) => {
       }
 }
 
-// module.exports.getMerchnat = async(req,res) => {
-//   res.render('submitted');
-// }

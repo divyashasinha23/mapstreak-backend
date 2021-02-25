@@ -13,6 +13,8 @@ const findOrCreate=require("mongoose-findorcreate");
 const User =require('./models/User');
 const MerchantRoute=require('./routes/MerchantRoute');
 const Merchant=require('./models/merchantModel')
+const TiffinRoute = require('./routes/TiffinRoute');
+
 
 dotenv.config();
 connectDB();
@@ -24,6 +26,8 @@ app.use(cookieParser());
 
 app.use(UserRoute);
 app.use(MerchantRoute);
+app.use(TiffinRoute);
+
 
 
 app.use(passport.initialize());
@@ -134,9 +138,7 @@ passport.use(new facebookStrategy({
   }); 
 
 
-app.get('/', (req,res) => {
-    res.send('server running..');
-});
+
 
 
 
