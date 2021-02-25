@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Tiffin = require('../models/tiffinServiceModel');
-const tiffinservices = require('../data/tiffinServices');
+
 
 
 module.exports.get_tiffin  = asyncHandler(async (req, res) => {
@@ -17,3 +17,17 @@ module.exports.get_tiffin  = asyncHandler(async (req, res) => {
       throw new Error('No such Service found');
     }
   });
+
+  module.exports.post_tiffin = async (req,res,next) => {
+    try{
+    const tiffin = await Tiffin.create(req.body);
+    res.status(201).json({
+      success: true,
+      data: tiffin
+    });
+  }
+  catch(err){
+    res.status(400);
+    console.log(err);
+  }
+  }

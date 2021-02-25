@@ -16,6 +16,7 @@ const Merchant=require('./models/merchantModel')
 const TiffinRoute = require('./routes/TiffinRoute');
 
 
+
 dotenv.config();
 connectDB();
 var app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(UserRoute);
 app.use(MerchantRoute);
 app.use(TiffinRoute);
+
 
 
 

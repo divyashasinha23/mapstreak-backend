@@ -3,7 +3,7 @@
         {
             _id: "maharaja-tiffin-service",
             name: "Maharaja_tiffin_service",
-            location: "Bandra",
+            address:"gagan garima khadki station pune maharashtra",
             Rating: "5"
         },
         {
@@ -12,8 +12,7 @@
             name: "Maharaja_tiffin_service",
             location: "Bandra",
             Rating: "5",
-           
-          
+              
         },
         {
             
@@ -51,9 +50,7 @@
             _id: "katelal_tiffin_service",
             name: "Katelal_tiffin_service",
             location: "Bandra",
-            Rating: "5",
-           
-            
+            Rating: "5",    
         }
     ]
     
