@@ -110,6 +110,8 @@ module.exports.post_login = async (req,res) => {
   }
 
 
+
+
 module.exports.post_forgotpassword = async(req,res) =>{
     try{
       const {email} = req.body;
@@ -151,18 +153,58 @@ module.exports.post_forgotpassword = async(req,res) =>{
 
 
 
-      module.exports.post_resetpassword = async(req,res) => {
-        try{
-        const {newPassword} = req.body;
-        const passwordHash = await bcrypt.hash(newPassword, 12)
-
-        await User.findOneAndUpdate({_id: req.user.id},{
-          password: passwordHash
-        });
-        res.json({message: "password succesfully changed"});
-      }
-      catch(err){
-        console.log(err);
-      }
       
+module.exports.post_resetpassword = async(req,res) => {
+  try{
+  const {newPassword} = req.body;
+  const passwordHash = await bcrypt.hash(newPassword, 12)
+
+  
+  await User.findOneAndUpdate({_id: res.locals.user._id},{
+    password: passwordHash
+  });
+  res.json({message: "password succesfully changed"});
+}
+catch(err){
+  console.log(err);
+}
+
+}
+
+    module.exports.update_profile = async(req,res) => {
+      try{
+      const {newemail} = req.body;
+      const {newPassword} = req.body;
+      const passwordHash = await bcrypt.hash(newPassword, 12)
+
+      await User.findOneAndUpdate({_id: res.locals.user._id}, {
+        email:newemail,
+        password:passwordHash
+      })
+  
+      res.json({message: "Profile updated"});
+    }
+    catch(err){
+      console.log(err);
+    }
+    }  
+
+    module.exports.get_profile = async (req, res) => {
+      try{
+      const user = await User.findById(res.locals.user);
+    
+      if (user) {
+        res.json({
+          _id: user._id,
+          name: user.name,
+          email: user.email
+        });
+      } else {
+        res.status(404);
+        throw new Error('user not found');
       }
+    }
+    catch(err){
+      console.log(err);
+    }
+    };

@@ -1,13 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../Controllers/UserController');
-const authRequire = require('../Middleware/ForgetPasswordMiddleware');
+// const authRequire = require('../Middleware/ForgetPasswordMiddleware');
+const {requireAuth, current_User} = require('../Middleware/UserMiddleware');
 
 
 router.post('/login',UserController.post_login);
 router.post('/signup',UserController.post_signup);
+router.get('/profile',current_User);
+router.get('/profile',requireAuth,UserController.get_profile);
+router.post('/update-profile', current_User);
+router.post('/update-profile',requireAuth, UserController.update_profile);
 router.post('/forgot-password',UserController.post_forgotpassword);
-router.post('/reset-password', authRequire, UserController.post_resetpassword);
+router.post('/reset-password',current_User);
+router.post('/reset-password', requireAuth, UserController.post_resetpassword);
 
 
 module.exports = router;
