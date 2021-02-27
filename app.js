@@ -115,6 +115,10 @@ passport.use(new facebookStrategy({
   })
   
   }));
+
+  app.get('/',(req,res) => {
+    res.send("server started");
+  })
   
   app.get('/auth/facebook', passport.authenticate('facebook',{scope:'email'}));
   app.get('/facebook/callback', passport.authenticate('facebook',{
