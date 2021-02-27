@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema
         type: String,
         required: [true, 'Please enter a password'],
     },
+    mobile_no:{
+        type:Number,
+        required: true
+    },
     uid:String,
     pic:String,  
     googleId:String,

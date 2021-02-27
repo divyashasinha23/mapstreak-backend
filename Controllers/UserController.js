@@ -24,12 +24,17 @@ const createToken = (id) => {
 //error handling
 const handleErrors = (err) => {
   console.log(err.message, err.code);
-  let errors = { email: '', password: ''};
+  let errors = { email: '', password: '', mobile_no: ''};
 
   if (err.code === 11000) {
-          errors.email = 'that email is already registered';
-      return errors;
-  }
+    if(err.message.includes("mobile_no_1")){
+    errors.mobile_no = 'Mobile Number Already Registered';
+    }
+    else{
+     errors.email = 'That Email is Already Registered';
+    }
+    
+}
 
   if(err.message === "invalid Email id"){
     errors.email = "Invalid Email ID";
@@ -56,9 +61,9 @@ return errors;
 
 module.exports.post_signup = async(req,res)=>
 {
-  const {name,email,password}=req.body;
+  const {name,email,password,mobile_no}=req.body;
   try{
-       const user=await User.create({name,email,password});
+       const user=await User.create({name,email,password,mobile_no});
        const token =createToken(user._id);
        res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
        if(user){
@@ -68,6 +73,7 @@ module.exports.post_signup = async(req,res)=>
            name:user.name,
            password:user.password,
            email:user.email,   
+           mobile_no:user.mobile_no,
            token:token
          });
        }
@@ -174,12 +180,11 @@ catch(err){
     module.exports.update_profile = async(req,res) => {
       try{
       const {newemail} = req.body;
-      const {newPassword} = req.body;
-      const passwordHash = await bcrypt.hash(newPassword, 12)
+      const {newMobileNumber} = req.body;
 
       await User.findOneAndUpdate({_id: res.locals.user._id}, {
         email:newemail,
-        password:passwordHash
+        mobile_no: newMobileNumber
       })
   
       res.json({message: "Profile updated"});
@@ -197,7 +202,8 @@ catch(err){
         res.json({
           _id: user._id,
           name: user.name,
-          email: user.email
+          email: user.email,
+          mobile_no: user.mobile_no
         });
       } else {
         res.status(404);
