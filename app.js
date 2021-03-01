@@ -14,6 +14,7 @@ const User =require('./models/User');
 const MerchantRoute=require('./routes/MerchantRoute');
 const Merchant=require('./models/merchantModel')
 const TiffinRoute = require('./routes/TiffinRoute');
+const PartnerRoute = require('./routes/PartnerRoute');
 const path = require('path')
 const shortid = require('shortid')
 const Razorpay = require('razorpay')
@@ -31,6 +32,7 @@ app.use(cors());
 app.use(UserRoute);
 app.use(MerchantRoute);
 app.use(TiffinRoute);
+app.use(PartnerRoute);
 
 
 

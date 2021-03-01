@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
 
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -116,7 +117,7 @@ module.exports.post_login = async (req,res) => {
   }
 
 
-
+//forget-password
 
 module.exports.post_forgotpassword = async(req,res) =>{
     try{
@@ -127,7 +128,12 @@ module.exports.post_forgotpassword = async(req,res) =>{
       }
      const token = createToken(user._id);  
      var transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: "smtpout.secureserver.net",
+            secure: true,
+            secureConnection: false, // TLS requires secureConnection to be false
+            tls: {
+                ciphers:'SSLv3'
+            },
             auth: {
               user: process.env.USER,
               pass: process.env.PASS
@@ -158,24 +164,26 @@ module.exports.post_forgotpassword = async(req,res) =>{
       }
 
 
-
+//reset-password
       
 module.exports.post_resetpassword = async(req,res) => {
   try{
   const {newPassword} = req.body;
   const passwordHash = await bcrypt.hash(newPassword, 12)
-
-  
+console.log(newPassword);
+console.log(res.locals.user);  
   await User.findOneAndUpdate({_id: res.locals.user._id},{
     password: passwordHash
   });
   res.json({message: "password succesfully changed"});
-}
+ }
 catch(err){
   console.log(err);
 }
 
 }
+
+//update-profile
 
     module.exports.update_profile = async(req,res) => {
       try{
@@ -193,6 +201,8 @@ catch(err){
       console.log(err);
     }
     }  
+
+//
 
     module.exports.get_profile = async (req, res) => {
       try{

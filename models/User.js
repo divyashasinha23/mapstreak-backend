@@ -22,6 +22,9 @@ const userSchema = new mongoose.Schema
         type:Number,
         required: true
     },
+    image: {
+        type: String
+     },
     uid:String,
     pic:String,  
     googleId:String,
