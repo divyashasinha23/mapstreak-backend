@@ -20,9 +20,9 @@ const partnerSchema = new mongoose.Schema
         type: Number
     },
     outlettype: {
-        Cloud_kitchen: { type: Boolean,requird: true},
-        Resturent: { type: Boolean,requird: true},
-        others: { type: Boolean,requird: true}
+        Cloud_kitchen: { type: Boolean},
+        Resturent: { type: Boolean},
+        others: { type: Boolean}
         
     },
     contact_person: {
@@ -40,8 +40,8 @@ const partnerSchema = new mongoose.Schema
     services: {
         // deleviery: { type: Boolean, required: true,default:false},
         // walkin: { type: Boolean, required: true,default:false}
-        delivery: {type: Boolean,required:true},
-        walkin: {type: Boolean,required:true}
+        delivery: {type: Boolean},
+        walkin: {type: Boolean}
     },
     specify:{
         type: String
