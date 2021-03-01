@@ -154,7 +154,9 @@ module.exports.post_forgotpassword = async(req,res) =>{
             if (error) {
               console.log(error);
             } else {
-              res.json({msg: "Re-send password, check your email"})
+              res.json({
+                email: user.email,
+              })
             }
           });
         }
@@ -175,7 +177,9 @@ console.log(res.locals.user);
   await User.findOneAndUpdate({_id: res.locals.user._id},{
     password: passwordHash
   });
-  res.json({message: "password succesfully changed"});
+  res.json({
+    newPassword: newPassword,
+  });
  }
 catch(err){
   console.log(err);
@@ -195,7 +199,10 @@ catch(err){
         mobile_no: newMobileNumber
       })
   
-      res.json({message: "Profile updated"});
+      res.json({
+        email: newemail,
+        mobile_no: newMobileNumber
+      });
     }
     catch(err){
       console.log(err);
