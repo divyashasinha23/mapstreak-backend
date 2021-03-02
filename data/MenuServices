@@ -1,0 +1,29 @@
+
+    const menu = [
+        {
+
+            membership_plan:{
+                Gold: False,
+                Diamond: True,
+                Silver:False
+            },
+            monthly_plan:{
+                monthly:True,
+                weekly:False
+            },
+            meal_for:{
+                lunch:True,
+                Dinner:False,
+                Both:False
+            },
+            Delivery_type:{
+                deilvery:True,
+                pickup:False
+            },
+            veg_name: "Maharaja veg Bhoj"
+            Nonveg_name: "Maharaja Nonveg Bhoj"         
+        },
+        
+    ]
+    
+    module.exports = menu
