@@ -27,7 +27,6 @@ const tiffinSchema = new mongoose.Schema
      },
      numReviews:{
       type: Number,
-      default: 0
      },
  location:{
      //GeoJSON Point
