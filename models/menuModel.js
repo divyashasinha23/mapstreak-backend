@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const MenuSchema = new mongoose.Schema({
    tiffinservice:{
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref:'Tiffin'
    },
    membership_plan:{
@@ -11,17 +11,20 @@ const MenuSchema = new mongoose.Schema({
     Diamond: { type: Boolean}
    },
 monthly_plan:{
-    monthly:{type: String},
-    weekly:{type: String}
+    monthly:{type: Boolean},
+    weekly:{type: Boolean}
    },
 meal_for:{
-     lunch:{type: String},
-     Dinner:{type: String},
-     Both:{type: String}
+     lunch:{type: Boolean},
+     Dinner:{type: Boolean},
+     Both:{type: Boolean}
    },
 Delivery_type:{
-    delivery:{type: String},
-    pickup:{type: String}
+    delivery:{type: Boolean},
+    pickup:{type: Boolean}
+   },
+   Date:{
+       type: String
    },
     veg_name:{
         type:String

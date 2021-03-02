@@ -3,7 +3,10 @@ const mongoose=require("mongoose");
 
 const tiffinSchema = new mongoose.Schema
 ({
-    
+    _id:{
+        type:String,
+        unique: true
+      },
     merchant:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Merchant'

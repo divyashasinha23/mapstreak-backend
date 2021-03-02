@@ -33,3 +33,17 @@ module.exports.get_tiffin  = asyncHandler(async (req, res) => {
     console.log(err);
   }
   }
+
+  module.exports.post_menu_tiffin = async(req,res,next) => {
+    try{
+      const menu = await Menu.create(req.body);
+      res.status(201).json({
+        success:true,
+        data:menu,
+      });
+    }
+    catch(err){
+      res.status(400);
+      console.log(err);
+    }
+  }
