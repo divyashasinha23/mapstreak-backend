@@ -24,7 +24,14 @@ module.exports.get_tiffin  = asyncHandler(async (req, res) => {
     const tiffin = await Tiffin.create(req.body);
     res.status(201).json({
       success: true,
-      data: tiffin,
+      _id: tiffin._id,
+      cusines: tiffin.cusines,
+      address:tiffin.address,
+      Rating:tiffin.Rating,
+      image:tiffin.image,
+      Discount:tiffin.Discount,
+      name:tiffin.name,
+      Time:tiffin.Time
     });
     
   }

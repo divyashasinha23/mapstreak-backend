@@ -7,10 +7,6 @@ const tiffinSchema = new mongoose.Schema
         type:String,
         unique: true
       },
-    merchant:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Merchant'
-    },
     image:{
       type: String
     },
@@ -28,6 +24,10 @@ const tiffinSchema = new mongoose.Schema
      },
      Discount:{
       type:String
+     },
+     numReviews:{
+      type: Number,
+      default: 0
      },
  location:{
      //GeoJSON Point

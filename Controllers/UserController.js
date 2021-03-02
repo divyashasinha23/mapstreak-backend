@@ -193,15 +193,18 @@ catch(err){
       try{
       const {newemail} = req.body;
       const {newMobileNumber} = req.body;
+      const {image} = req.body;
 
       await User.findOneAndUpdate({_id: res.locals.user._id}, {
         email:newemail,
-        mobile_no: newMobileNumber
+        mobile_no: newMobileNumber,
+        image: image
       })
   
       res.json({
         email: newemail,
-        mobile_no: newMobileNumber
+        mobile_no: newMobileNumber,
+        image: image
       });
     }
     catch(err){
@@ -220,7 +223,8 @@ catch(err){
           _id: user._id,
           name: user.name,
           email: user.email,
-          mobile_no: user.mobile_no
+          mobile_no: user.mobile_no,
+          image: user.image
         });
       } else {
         res.status(404);
