@@ -20,6 +20,15 @@ const tiffinSchema = new mongoose.Schema
      address:{
        type:String
      },
+     cusines:[{
+       type:String
+     }],
+     Time:{
+       type:String
+     },
+     Discount:{
+      type:String
+     },
  location:{
      //GeoJSON Point
      type: {
