@@ -5,7 +5,7 @@ const GoldSchema = mongoose.Schema({
    Weekly_price: {
        type:String
    },
-   Monthly_plan:{
+   Monthly_price:{
        type:String
    },
    image:{
@@ -21,7 +21,7 @@ const SilverSchema = mongoose.Schema({
     Weekly_price: {
         type:String
     },
-    Monthly_plan:{
+    Monthly_price:{
         type:String
     },
     image:{
@@ -37,7 +37,7 @@ const SilverSchema = mongoose.Schema({
     Weekly_price: {
         type:String
     },
-    Monthly_plan:{
+    Monthly_price:{
         type:String
     },
     image:{
