@@ -54,3 +54,9 @@ module.exports.get_tiffin  = asyncHandler(async (req, res) => {
       console.log(err);
     }
   }
+
+  module.exports.get_menu_tiffin = async(req,res,next) => {
+      const menu = await Menu.find({});
+      res.json(menu);
+    }
+  

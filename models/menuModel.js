@@ -1,40 +1,91 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const MenuSchema = new mongoose.Schema({
+
+const GoldSchema = mongoose.Schema({
+   Weekly_price: {
+       type:String
+   },
+   Monthly_plan:{
+       type:String
+   },
+   image:{
+    type:String
+},
    tiffinservice:{
-    type: String,
+    type:String,
     ref:'Tiffin'
-   },
-   membership_plan:{
-    Gold: { type: Boolean},
-    Silver: { type: Boolean},
-    Diamond: { type: Boolean}
-   },
-monthly_plan:{
-    monthly:{type: Boolean},
-    weekly:{type: Boolean}
-   },
-meal_for:{
-     lunch:{type: Boolean},
-     Dinner:{type: Boolean},
-     Both:{type: Boolean}
-   },
-Delivery_type:{
-    delivery:{type: Boolean},
-    pickup:{type: Boolean}
-   },
-   Date:{
-       type: String
-   },
-    veg_name:{
-        type:String
-    },
-    Nonveg_name:{
-        type:String
-    },
-
+},
 });
 
-const Menu= mongoose.model('Menu', MenuSchema);
+const SilverSchema = mongoose.Schema({
+    Weekly_price: {
+        type:String
+    },
+    Monthly_plan:{
+        type:String
+    },
+    image:{
+        type:String
+    },
+    tiffinservice:{
+        type:String,
+        ref:'Tiffin'
+    },
+ });
+
+ const DiamondSchema = mongoose.Schema({
+    Weekly_price: {
+        type:String
+    },
+    Monthly_plan:{
+        type:String
+    },
+    image:{
+        type:String
+    },
+    tiffinservice:{
+        type:String,
+        ref:'Tiffin'
+    },
+ });
+
+const menuSchema = new mongoose.Schema({
+  tiffinservice:{
+      type:String,
+      ref:'Tiffin'
+  },
+  plan:{
+      veg_plan:{
+          Gold: [GoldSchema],
+          Silver:[SilverSchema],
+          Diamond:[DiamondSchema],
+      },
+      Nonveg_plan:{
+        Gold: [GoldSchema],
+        Silver:[SilverSchema],
+        Diamond:[DiamondSchema],
+      }
+  },
+  delivery:{
+      price:{
+          type: String
+      }
+  },
+  pickup:{
+      price:{
+          type:String
+      }
+  },
+  meal_for:{
+      lunch: {type:Boolean},
+      Dinner: {type:Boolean},
+      Both:{type:Boolean}
+  },
+  Date:{
+      type:String
+  }
+});
+
+const Menu = mongoose.model('Menu', menuSchema);
 
 module.exports = Menu;
