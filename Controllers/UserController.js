@@ -179,6 +179,7 @@ console.log(res.locals.user);
   });
   res.json({
     newPassword: newPassword,
+    msg:"password changed"
   });
  }
 catch(err){
@@ -204,7 +205,8 @@ catch(err){
       res.json({
         email: newemail,
         mobile_no: newMobileNumber,
-        image: image
+        image: image,
+        msg:"profile updated successfully"
       });
     }
     catch(err){
