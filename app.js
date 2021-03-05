@@ -20,6 +20,9 @@ const shortid = require('shortid')
 const Razorpay = require('razorpay')
 const cors = require('cors')
 
+
+
+
 dotenv.config({path: '.env'});
 connectDB();
 var app = express();
@@ -202,10 +205,13 @@ passport.use(new facebookStrategy({
     }
   })
   
-
-
-
+//socket
+// const io=require('socket.io')(server)
+// io.on('connection',()=>{
+//   //
+// })
 
 PORT= process.env.PORT;
 
+// const server=
 app.listen(PORT, ()=> console.log(`Server started at ${PORT}`));
