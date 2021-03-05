@@ -21,7 +21,7 @@ const Auth = (req,res,next) => {
 };
 
 
-const currentUser = (req,res,next) => {
+const currentMerchant = (req,res,next) => {
   const token = req.cookies.jwt;
   if(token){
       jwt.verify(token,'mapstreak-merchant', async (err, decodedToken) => {
@@ -43,4 +43,4 @@ const currentUser = (req,res,next) => {
   }
 }
 
-module.exports = {Auth, currentUser};
+module.exports = {Auth, currentMerchant};

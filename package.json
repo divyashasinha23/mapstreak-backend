@@ -1,7 +1,6 @@
 {
   "name": "mapstreak-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -37,6 +36,16 @@
     "razorpay": "^2.0.6",
     "request-promise": "^4.2.6",
     "shortid": "^2.2.16",
+    "socket.io": "^3.1.2",
     "validator": "^13.5.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divyashasinha23/mapstreak-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/divyashasinha23/mapstreak-backend/issues"
+  },
+  "homepage": "https://github.com/divyashasinha23/mapstreak-backend#readme",
+  "description": ""
 }
