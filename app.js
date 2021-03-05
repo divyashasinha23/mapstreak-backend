@@ -13,17 +13,17 @@ const findOrCreate=require("mongoose-findorcreate");
 const User =require('./models/User');
 const MerchantRoute=require('./routes/MerchantRoute');
 const Merchant=require('./models/merchantModel')
-const TiffinRoute = require('./routes/TiffinRoute');
 const PartnerRoute = require('./routes/PartnerRoute');
 const path = require('path')
 const shortid = require('shortid')
 const Razorpay = require('razorpay')
 const cors = require('cors')
+const serviceRoute = require('./routes/ServiceRoute');
+const menuRoute = require('./routes/menuRoute');
 
 
 
-
-dotenv.config({path: '.env'});
+dotenv.config({ path: '.env' });
 connectDB();
 var app = express();
 
@@ -34,8 +34,10 @@ app.use(cors());
 
 app.use(UserRoute);
 app.use(MerchantRoute);
-app.use(TiffinRoute);
 app.use(PartnerRoute);
+app.use(serviceRoute);
+app.use(menuRoute);
+app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 
 
