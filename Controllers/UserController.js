@@ -156,6 +156,7 @@ module.exports.post_forgotpassword = async(req,res) =>{
             } else {
               res.json({
                 email: user.email,
+                msg: "Re-send link send, Please check your email"
               })
             }
           });
@@ -179,7 +180,7 @@ console.log(res.locals.user);
   });
   res.json({
     newPassword: newPassword,
-    msg:"password changed"
+    msg:"password succesfully changed"
   });
  }
 catch(err){
