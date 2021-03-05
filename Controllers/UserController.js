@@ -25,7 +25,7 @@ const createToken = (id) => {
 //error handling
 const handleErrors = (err) => {
   console.log(err.message, err.code);
-  let errors = { email: '', password: '', mobile_no: ''};
+  let errors = { email: '', password: '', mobile_no:''};
 
   if (err.code === 11000) {
     if(err.message.includes("mobile_no_1")){
