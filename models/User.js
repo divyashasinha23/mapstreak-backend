@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema
     },
     mobile_no:{
         type:Number,
-        required: true
+        required: true,
+        unique:true
     },
     image: {
         type: String
