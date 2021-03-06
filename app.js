@@ -38,6 +38,7 @@ app.use(PartnerRoute);
 app.use(serviceRoute);
 app.use(menuRoute);
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
+app.use('/tiffinservices/:id',require('./routes/TiffinRoute'));
 
 
 

@@ -18,6 +18,6 @@ const Menu = require('../models/menuModel');
   }
 
   module.exports.get_menu_tiffin = async(req,res,next) => {
-      const menu = await Menu.findById(req.params.id);
+      const tiffin_id = req.params.id;
       res.json(menu);
     }
