@@ -17,7 +17,18 @@ const Menu = require('../models/menuModel');
     }
   }
 
-  module.exports.get_menu_tiffin = async(req,res,next) => {
-      const tiffin_id = req.params.id;
-      res.json(menu);
+  module.exports.get_menu_tiffin = async (req, res, next) => {
+    try {
+      const menu = await Menu.find();
+  
+      return res.status(200).json({
+        success: true,
+        data: menu,
+      });
+    } catch (error) {
+      console.error(err);
+      res.status(500).json({
+        error: 'Server error',
+      });
     }
+  };
