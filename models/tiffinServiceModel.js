@@ -30,7 +30,8 @@ const tiffinSchema = new mongoose.Schema
      },
      service:{
           type:String,
-          ref:'Service'
+          ref:'Service',
+          unique:true
      },
  location:{
      //GeoJSON Point

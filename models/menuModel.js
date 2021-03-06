@@ -52,7 +52,8 @@ const SilverSchema = mongoose.Schema({
 const menuSchema = new mongoose.Schema({
   tiffinservice:{
       type:String,
-      ref:'Tiffin'
+      ref:'Tiffin',
+      unique:true
   },
   plan:{
       veg_plan:{
