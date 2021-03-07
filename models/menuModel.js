@@ -49,6 +49,15 @@ const SilverSchema = mongoose.Schema({
     },
  });
 
+const Extra = mongoose.Schema({
+    name:{
+        type:String
+    },
+    price:{
+        type:String
+    }
+})
+
 const menuSchema = new mongoose.Schema({
   tiffinservice:{
       type:String,
@@ -66,6 +75,13 @@ const menuSchema = new mongoose.Schema({
         Silver:[SilverSchema],
         Diamond:[DiamondSchema],
       }
+  },
+  extras:{
+      extra1: [Extra],
+      extra2: [Extra],
+      extra3: [Extra],
+      extra4: [Extra],
+      extra5: [Extra],
   },
   delivery:{
       price:{
