@@ -10,6 +10,9 @@ const serviceSchema = new mongoose.Schema({
     },
     image:{
         type:String
+    },
+    coupon_company:{
+        type:String
     }
 });
 

@@ -83,6 +83,14 @@ const menuSchema = new mongoose.Schema({
       extra4: [Extra],
       extra5: [Extra],
   },
+  coupon:{
+    type:String,
+     
+},
+coupon_company:{
+    type:String,
+    ref:'Service'
+},
   delivery:{
       price:{
           type: String
