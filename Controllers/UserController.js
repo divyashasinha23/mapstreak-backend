@@ -215,7 +215,33 @@ catch(err){
     }
     }  
 
-//
+    module.exports.update_profile_by_id = async(req,res) => {
+      try{
+      const {newemail} = req.body;
+      const {newMobileNumber} = req.body;
+      const {image} = req.body;
+
+      await User.findOneAndUpdate({_id: req.params.id}, {
+        email:newemail,
+        mobile_no: newMobileNumber,
+        image: image
+      })
+  
+      res.json({
+        email: newemail,
+        mobile_no: newMobileNumber,
+        image: image,
+        msg:"profile updated successfully"
+      });
+    }
+    catch(err){
+      console.log(err);
+    }
+    } 
+
+
+
+// get-profile
 
     module.exports.get_profile = async (req, res) => {
       try{
@@ -238,3 +264,28 @@ catch(err){
       console.log(err);
     }
     };
+
+    module.exports.get_profile_by_id = async (req, res) => {
+      try{
+      const user = await User.findById(req.params.id);
+    
+      if (user) {
+        res.json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          mobile_no: user.mobile_no,
+          image: user.image
+        });
+      } else {
+        res.status(404);
+        throw new Error('user not found');
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+    };
+
+
+    
