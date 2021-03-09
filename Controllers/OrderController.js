@@ -18,7 +18,7 @@ const Order = require('../models/orderModel');
 
   module.exports.get_order_by_id = async(req,res,next) => {
       try{
-          const order = await Order.findById(req.params.id);
+          const order = await Order.findOne({user: req.params.id});
           return res.status(200).json({
             data: order,
           });
