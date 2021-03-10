@@ -37,8 +37,8 @@ const handleErrors = (err) => {
     
 }
 
-  if(err.message === "invalid Email id"){
-    errors.email = "Invalid Email ID";
+  if(err.message === "invalid username"){
+    errors.email = "Invalid Email id/ Mobile Number";
    
   }
 
@@ -98,15 +98,17 @@ module.exports.post_signup = async(req,res)=>
 
 
 module.exports.post_login = async (req,res) => {
-    const {email, password} = req.body;
+    const {username} = req.body
+    const {password} = req.body
     try{
-      const user = await User.login(email,password);
+      const user = await User.login(username,password);
       const token = createToken(user._id);
       res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
        res.status(201).json({
          _id : user._id,
          password: user.password,
          email: user.email,
+         mobile_no: user.mobile_no,
          token:token
        });  
       }

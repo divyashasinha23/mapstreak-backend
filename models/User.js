@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema
         type:String,
     },
     mobile_no:{
-        type:Number,
+        type:String,
     },
     email:{
         type: String,
@@ -43,8 +43,8 @@ userSchema.pre('save',async function(next){
 
 
 //static login
-userSchema.statics.login = async function(email, password){
-    const user = await this.findOne({email});
+userSchema.statics.login = async function(username, password){
+    const user = await this.findOne({$or: [{email:username}, {mobile_no: username}]});
     if (user){
   const auth = await bcrypt.compare(password, user.password);
   if(auth){
@@ -52,7 +52,7 @@ userSchema.statics.login = async function(email, password){
   }
   throw Error('incorrect password');
     }
-    throw Error('invalid Email id');
+    throw Error('invalid username');
 }
 
 
