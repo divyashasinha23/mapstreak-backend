@@ -62,9 +62,9 @@ return errors;
 
 module.exports.post_signup = async(req,res)=>
 {
-  const {name,email,password,mobile_no}=req.body;
+  const {name,email,password,mobile_no,image}=req.body;
   try{
-       const user=await User.create({name,email,password,mobile_no});
+       const user=await User.create({name,email,password,mobile_no,image});
        const token =createToken(user._id);
        res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
        if(user){
@@ -75,6 +75,7 @@ module.exports.post_signup = async(req,res)=>
            password:user.password,
            email:user.email,   
            mobile_no:user.mobile_no,
+           image:user.image,
            token:token
          });
        }

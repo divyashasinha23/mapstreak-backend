@@ -40,7 +40,7 @@ app.use(menuRoute);
 app.use(orderRoute);
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
-
+app.use('/uploads', express.static('uploads'));
 
 
 app.use(passport.initialize());
