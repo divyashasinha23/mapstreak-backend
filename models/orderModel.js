@@ -7,10 +7,10 @@ const orderSchema =  new mongoose.Schema
       required: true,
       ref: 'User',
     },
-     tiffinservice: {
+     Menu: {
           type: String,
           required: true,
-          ref: 'Tiffin',
+          ref: 'Menu',
         },
     deliveryAddress: {
       address: { type: String, required: true },
@@ -59,6 +59,9 @@ const orderSchema =  new mongoose.Schema
      
       default: false,
     },
+    status:{
+      type: String
+    }
   
   
 },

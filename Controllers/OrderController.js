@@ -18,10 +18,10 @@ const Order = require('../models/orderModel');
 
   module.exports.get_order_by_id = async(req,res,next) => {
       try{
-          const order = await Order.findOne({user: req.params.id});
-          return res.status(200).json({
-            data: order,
-          });
+          const orders = await Order.find({user: req.params.id},null, {sort: {'createdAt': -1 }}).
+          populate('Menu').exec( (err, orders) => {
+            res.json(orders);
+        })
       }
       catch(err){
         console.error(err);

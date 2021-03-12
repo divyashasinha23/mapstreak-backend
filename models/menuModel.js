@@ -64,6 +64,10 @@ const menuSchema = new mongoose.Schema({
       ref:'Tiffin',
       unique:true
   },
+  user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+ },
   plan:{
       veg_plan:{
           Gold: [GoldSchema],
