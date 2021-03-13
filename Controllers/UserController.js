@@ -62,7 +62,8 @@ return errors;
 
 module.exports.post_signup = async(req,res)=>
 {
-  const {name,email,password,mobile_no,image}=req.body;
+  const {name,email,password,mobile_no}=req.body;
+  const {image}=req.file;
   try{
        const user=await User.create({name,email,password,mobile_no,image});
        const token =createToken(user._id);

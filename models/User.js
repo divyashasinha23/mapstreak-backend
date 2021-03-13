@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema
         required: [true, 'Please enter a password'],
     },
     image: {
-        type: String
+        type: String,
+        required:[true,'Please upload image']
      },
     uid:String,
     pic:String,  
