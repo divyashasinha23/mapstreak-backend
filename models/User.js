@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema
 ({
     name:{
         type:String,
+        required: true
     },
     mobile_no:{
         type:String,
@@ -22,8 +23,7 @@ const userSchema = new mongoose.Schema
         required: [true, 'Please enter a password'],
     },
     image: {
-        type: String,
-        required:[true,'Please upload image']
+        type: String,    
      },
     uid:String,
     pic:String,  

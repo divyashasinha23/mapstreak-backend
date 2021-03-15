@@ -20,7 +20,7 @@ const Razorpay = require('razorpay')
 const cors = require('cors')
 const serviceRoute = require('./routes/ServiceRoute');
 const menuRoute = require('./routes/menuRoute');
-const orderRoute = require('./routes/OrderRoute');
+const customerorderRoute = require('./routes/CustomerOrderRoute');
 
 
 dotenv.config({ path: '.env' });
@@ -37,7 +37,7 @@ app.use(MerchantRoute);
 app.use(PartnerRoute);
 app.use(serviceRoute);
 app.use(menuRoute);
-app.use(orderRoute);
+app.use(customerorderRoute);
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 app.use('/uploads', express.static('uploads'));
