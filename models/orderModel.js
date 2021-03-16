@@ -12,6 +12,14 @@ const orderSchema =  new mongoose.Schema
           required: true,
           ref: 'Menu',
         },
+        coupon_company:{
+          type:String,
+          ref:'Service'
+      },
+    //   coupon:{
+    //     type:String,
+    //      ref:'Menu'
+    // },
     deliveryAddress: {
       address: { type: String, required: true },
       city: { type: String,required: true },

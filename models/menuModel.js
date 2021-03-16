@@ -8,6 +8,9 @@ const GoldSchema = mongoose.Schema({
    Monthly_price:{
        type:String
    },
+   Day_price:{
+     type:String
+   },
    image:{
     type:String
 },
@@ -24,6 +27,9 @@ const SilverSchema = mongoose.Schema({
     Monthly_price:{
         type:String
     },
+    Day_price:{
+        type:String
+      },
     image:{
         type:String
     },
@@ -40,6 +46,9 @@ const SilverSchema = mongoose.Schema({
     Monthly_price:{
         type:String
     },
+    Day_price:{
+        type:String
+      },
     image:{
         type:String
     },
@@ -48,7 +57,6 @@ const SilverSchema = mongoose.Schema({
         ref:'Tiffin'
     },
  });
-
 
 const Extra = mongoose.Schema({
     name:{
@@ -81,20 +89,6 @@ const menuSchema = new mongoose.Schema({
         Diamond:[DiamondSchema],
       }
   },
-  trial:{
-    default: false,  
-      veg_plan:{
-      Gold:[GoldSchema],
-      Silver:[SilverSchema],
-      Diamond:[DiamondSchema]
-      },
-      Nonveg_plan:{
-        Gold:[GoldSchema],
-        Silver:[SilverSchema],
-        Diamond:[DiamondSchema]
-        },
-  },
-
   extras:{
       extra1: [Extra],
       extra2: [Extra],
@@ -103,7 +97,8 @@ const menuSchema = new mongoose.Schema({
       extra5: [Extra],
   },
   coupon:{
-    type:String     
+    type:String,
+     
 },
 coupon_company:{
     type:String,
@@ -123,6 +118,10 @@ coupon_company:{
       lunch: {type:Boolean},
       Dinner: {type:Boolean},
       Both:{type:Boolean}
+  },
+  order_for:{
+      order_now:{type:Boolean},
+      order_later:{type:Boolean}
   },
   Date:{
       type:String
