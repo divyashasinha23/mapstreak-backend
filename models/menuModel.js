@@ -8,6 +8,9 @@ const GoldSchema = mongoose.Schema({
    Monthly_price:{
        type:String
    },
+   Day_price:{
+     type:String
+   },
    image:{
     type:String
 },
@@ -24,6 +27,9 @@ const SilverSchema = mongoose.Schema({
     Monthly_price:{
         type:String
     },
+    Day_price:{
+        type:String
+      },
     image:{
         type:String
     },
@@ -40,6 +46,9 @@ const SilverSchema = mongoose.Schema({
     Monthly_price:{
         type:String
     },
+    Day_price:{
+        type:String
+      },
     image:{
         type:String
     },
@@ -109,6 +118,10 @@ coupon_company:{
       lunch: {type:Boolean},
       Dinner: {type:Boolean},
       Both:{type:Boolean}
+  },
+  order_for:{
+      order_now:{type:Boolean},
+      order_later:{type:Boolean}
   },
   Date:{
       type:String
