@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const TrialMenu = require('../models/TrialModel');
 
 
 
@@ -14,6 +15,10 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 
+
+
+
+
 //create token
 const maxAge = 1 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
@@ -21,7 +26,7 @@ const createToken = (id) => {
     expiresIn: maxAge,
     });
 };
-//error handling
+
 //error handling
 const handleErrors = (err) => {
   console.log(err.message, err.code);
@@ -202,6 +207,7 @@ catch(err){
       const {newMobileNumber} = req.body;
       const {image} = req.body;
 
+
       await User.findOneAndUpdate({_id: res.locals.user._id}, {
         name: newname,
         email:newemail,
@@ -222,32 +228,34 @@ catch(err){
     }
     }  
 
-    module.exports.update_profile_by_id = async(req,res) => {
-      try{
-      const {newname} = req.body;  
-      const {newemail} = req.body;
-      const {newMobileNumber} = req.body;
-      const {image} = req.body;
+    // module.exports.update_profile_by_id = async(req,res) => {
+    //   try{
+    //   const {newname} = req.body;  
+    //   const {newemail} = req.body;
+    //   const {newMobileNumber} = req.body;
+    //   let image = req.file.originalname;
+    //   const fileType = image[image.length-1];
+      
 
-      await User.findOneAndUpdate({_id: req.params.id}, {
-        name: newname,
-        email:newemail,
-        mobile_no: newMobileNumber,
-        image: image
-      })
+    //   await User.findOneAndUpdate({_id: req.params.id}, {
+    //     name: newname,
+    //     email:newemail,
+    //     mobile_no: newMobileNumber,
+    //     image : image
+    //   })
   
-      res.json({
-        name: newname,
-        email: newemail,
-        mobile_no: newMobileNumber,
-        image: image,
-        msg:"profile updated successfully"
-      });
-    }
-    catch(err){
-      console.log(err);
-    }
-    } 
+    //   res.json({
+    //     name: newname,
+    //     email: newemail,
+    //     mobile_no: newMobileNumber,
+       
+    //     msg:"profile updated successfully"
+    //   });
+    // }
+    // catch(err){
+    //   console.log(err);
+    // }
+    // } 
 
 
 
@@ -297,5 +305,6 @@ catch(err){
     }
     };
 
+ 
 
     

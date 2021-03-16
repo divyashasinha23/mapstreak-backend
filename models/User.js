@@ -22,9 +22,10 @@ const userSchema = new mongoose.Schema
         type: String,
         required: [true, 'Please enter a password'],
     },
-    image: {
-        type: String,    
-     },
+    image:{
+
+    },
+
     uid:String,
     pic:String,  
     googleId:String,
@@ -55,9 +56,6 @@ userSchema.statics.login = async function(username, password){
     }
     throw Error('invalid username');
 }
-
-
-
 
 
 const User= mongoose.model('User', userSchema);

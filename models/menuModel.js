@@ -49,6 +49,7 @@ const SilverSchema = mongoose.Schema({
     },
  });
 
+
 const Extra = mongoose.Schema({
     name:{
         type:String
@@ -80,6 +81,20 @@ const menuSchema = new mongoose.Schema({
         Diamond:[DiamondSchema],
       }
   },
+  trial:{
+    default: false,  
+      veg_plan:{
+      Gold:[GoldSchema],
+      Silver:[SilverSchema],
+      Diamond:[DiamondSchema]
+      },
+      Nonveg_plan:{
+        Gold:[GoldSchema],
+        Silver:[SilverSchema],
+        Diamond:[DiamondSchema]
+        },
+  },
+
   extras:{
       extra1: [Extra],
       extra2: [Extra],
@@ -88,8 +103,7 @@ const menuSchema = new mongoose.Schema({
       extra5: [Extra],
   },
   coupon:{
-    type:String,
-     
+    type:String     
 },
 coupon_company:{
     type:String,
