@@ -21,6 +21,8 @@ const cors = require('cors')
 const serviceRoute = require('./routes/ServiceRoute');
 const menuRoute = require('./routes/menuRoute');
 const customerorderRoute = require('./routes/CustomerOrderRoute');
+const paymentRoute=require('./routes/PaymentRoute');
+const {v4:uuidv4}=require('uuid')
 
 
 dotenv.config({ path: '.env' });
@@ -32,12 +34,15 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
+
+
 app.use(UserRoute);
 app.use(MerchantRoute);
 app.use(PartnerRoute);
 app.use(serviceRoute);
 app.use(menuRoute);
 app.use(customerorderRoute);
+app.use('/api',paymentRoute)
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 app.use('/uploads', express.static('uploads'));
