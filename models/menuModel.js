@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 
-const GoldSchema = mongoose.Schema({
+const plan1Schema = mongoose.Schema({
+   name:{
+       type:String
+   },
    Weekly_price: {
        type:String
    },
@@ -20,7 +23,10 @@ const GoldSchema = mongoose.Schema({
 },
 });
 
-const SilverSchema = mongoose.Schema({
+const plan2Schema = mongoose.Schema({
+    name:{
+        type:String
+    },
     Weekly_price: {
         type:String
     },
@@ -39,7 +45,10 @@ const SilverSchema = mongoose.Schema({
     },
  });
 
- const DiamondSchema = mongoose.Schema({
+ const plan3Schema = mongoose.Schema({
+    name:{
+        type:String
+    },
     Weekly_price: {
         type:String
     },
@@ -79,14 +88,14 @@ const menuSchema = new mongoose.Schema({
  },
   plan:{
       veg_plan:{
-          Gold: [GoldSchema],
-          Silver:[SilverSchema],
-          Diamond:[DiamondSchema],
+          plan1:[plan1Schema],
+          plan2:[plan2Schema],
+          plan3:[plan3Schema]    
       },
       Nonveg_plan:{
-        Gold: [GoldSchema],
-        Silver:[SilverSchema],
-        Diamond:[DiamondSchema],
+        plan1:[plan1Schema],
+        plan2:[plan2Schema],
+        plan3:[plan3Schema]    
       }
   },
   extras:{
@@ -120,8 +129,8 @@ coupon_company:{
       Both:{type:Boolean}
   },
   order_for:{
-      order_now:{type:Boolean},
-      order_later:{type:Boolean}
+      order_now:{type:Boolean,default:false},
+      order_later:{type:Boolean,default:false}
   },
   Date:{
       type:String

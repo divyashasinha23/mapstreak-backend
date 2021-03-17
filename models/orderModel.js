@@ -70,8 +70,6 @@ const orderSchema =  new mongoose.Schema
     status:{
       type: String
     }
-  
-  
 },
 {timestamps: true}
 );
