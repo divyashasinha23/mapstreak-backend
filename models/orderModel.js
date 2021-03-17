@@ -7,15 +7,25 @@ const orderSchema =  new mongoose.Schema
       required: true,
       ref: 'User',
     },
+    Tiffin:{
+      type:String,
+      ref:"Tiffin",
+      required:true
+    },
      Menu: {
-          type: String,
-          required: true,
-          ref: 'Menu',
-        },
+       plan:{
+         type:String,
+         required:true,
+         ref:"Menu"
+       },
+       extras:{
+         type:String
+       },
         coupon_company:{
           type:String,
           ref:'Service'
       },
+    },
     //   coupon:{
     //     type:String,
     //      ref:'Menu'
@@ -51,7 +61,6 @@ const orderSchema =  new mongoose.Schema
     },
     totalPrice: {
       type: Number,
-    
       default: 0.0,
     },
     isPaid: {
@@ -67,8 +76,9 @@ const orderSchema =  new mongoose.Schema
      
       default: false,
     },
+    //shows active and non active orders denoted by 1 and 0 respectively
     status:{
-      type: String
+      type: Number
     }
 },
 {timestamps: true}
