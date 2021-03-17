@@ -6,16 +6,10 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
 
-
-
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-
-
-
-
 
 
 //create token
@@ -281,6 +275,8 @@ catch(err){
       console.log(err);
     }
     };
+
+//get-profile by id
 
     module.exports.get_profile_by_id = async (req, res) => {
       try{
