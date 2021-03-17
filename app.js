@@ -21,6 +21,7 @@ const cors = require('cors')
 const serviceRoute = require('./routes/ServiceRoute');
 const menuRoute = require('./routes/menuRoute');
 const customerorderRoute = require('./routes/CustomerOrderRoute');
+const searchRoute = require('./routes/SearchRoute');
 
 
 dotenv.config({ path: '.env' });
@@ -38,6 +39,7 @@ app.use(PartnerRoute);
 app.use(serviceRoute);
 app.use(menuRoute);
 app.use(customerorderRoute);
+app.use(searchRoute);
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 app.use('/uploads', express.static('uploads'));
