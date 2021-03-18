@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema
         required: [true, 'Please enter a password'],
     },
     image:{
-
+       type:String
     },
 
     uid:String,

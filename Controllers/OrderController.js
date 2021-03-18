@@ -19,7 +19,8 @@ const Order = require('../models/orderModel');
 //get order by user id
   module.exports.get_order_by_id = async(req,res,next) => {
       try{
-        const user_orders = await Order.find({user: req.params.id},{ Tiffin: 1, Menu: 1, createdAt:1, status: 1 },{sort : {createdAt : -1, status: 1}});
+        const user_orders = await Order.find({user: req.params.id},{ Tiffin: 1, Menu: 1, Order_Date:1, status: 1 },
+          {sort : {createdAt: -1}});
           if(user_orders){
             res.status(201).json({
                user_orders
@@ -34,7 +35,7 @@ const Order = require('../models/orderModel');
       }
   }
 
-//get order details by 
+//get order details by order_id
 
 module.exports.get_order_by_orderid = async(req,res) => {
   try{

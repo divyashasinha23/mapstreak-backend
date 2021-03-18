@@ -73,12 +73,14 @@ const orderSchema =  new mongoose.Schema
     },
     isDelivered: {
       type: Boolean,
-     
       default: false,
     },
-    //shows active and non active orders denoted by 1 and 0 respectively
+    Order_Date:{
+     type: String
+    },
+    //shows active and non active orders denoted by true and false respectively
     status:{
-      type: Number
+      type: Boolean
     }
 },
 {timestamps: true}
