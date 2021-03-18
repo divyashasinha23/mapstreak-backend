@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const partnercontroller = require('../Contollers/partnercontroller');
+const partnercontroller = require('../Controllers/partnercontroller');
 // const path = require('path');
 const nodemailer = require("nodemailer");
 const Partner = require('../models/partnerModel');
 const fs = require('fs');
-var {Auth, currentUser} = require('../Middleware/MerchantMiddleware');
+// var {Auth, currentUser} = require('../Middleware/MerchantMiddleware');
 
 var path;
 
@@ -26,8 +26,8 @@ var Storage= multer.diskStorage({
     storage:Storage
   }).single('image');
 
- router.get('/partnerwithus', currentUser);
- router.get('/partnerwithus', Auth, partnercontroller.partner_get);
+//  router.get('/partnerwithus', currentUser);
+//  router.get('/partnerwithus', Auth, partnercontroller.partner_get);
 
 
 router.post('/partnerwithus',(req,res) => {
