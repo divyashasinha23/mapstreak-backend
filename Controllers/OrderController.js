@@ -16,13 +16,17 @@ const Order = require('../models/orderModel');
     }
   }
 
+//get order by user id
   module.exports.get_order_by_id = async(req,res,next) => {
       try{
-          const orders = await Order.find({user: req.params.id},null, {sort: {'createdAt': -1 }})
-          res.status(201).json({
-            data: orders
-          });
-      }
+        const user_orders = await Order.find({user: req.params.id},{ Tiffin: 1, Menu: 1, Order_Date:1, status: 1 },
+          {sort : {createdAt: -1}});
+          if(user_orders){
+            res.status(201).json({
+               user_orders
+            });
+          }
+        }
       catch(err){
         console.error(err);
         res.status(500).json({
@@ -30,3 +34,22 @@ const Order = require('../models/orderModel');
         });
       }
   }
+
+//get order details by order_id
+
+module.exports.get_order_by_orderid = async(req,res) => {
+  try{
+    const orders = await Order.findById(req.params.id);
+    if(orders){
+      res.status(201).json({
+        data: orders
+      });
+    }
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({
+      error: 'Server error',
+    });
+  }
+}
