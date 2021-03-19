@@ -21,6 +21,7 @@
     "express-async-handler": "^1.1.4",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.1",
+    "formidable": "^1.2.2",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.17",
