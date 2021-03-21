@@ -5,7 +5,8 @@ const router = express.Router();
 router.get('/search', function(req,res,next) {
     var seacrhfield = req.query.name;
     Tiffin.find({name:{$regex: seacrhfield, $options: '$i'}}).then((data) => {
-        res.status(200).json(data);
+        // res.status(200).json(data);
+        res.send(data);
     })
 });
 

@@ -1,0 +1,66 @@
+const mongoose = require('mongoose');
+const addToCart = require('../models/addToCartModel');
+
+
+
+
+
+
+module.exports.post_addToCart= async(req,res,next) => {
+    try{
+      const addtocart = await addToCart.create(req.body);
+       res.status(201).json({
+         success:true,
+         data:addtocart,
+       });
+    }
+        
+    catch(err){
+      console.error(err);
+      res.status(400);
+        
+      };
+    
+    }
+
+    module.exports.get_cart_details_by_id=async(req,res,next)=>{
+        try{
+            const users_addToCart=await addToCart.find({user:req.params.id},{plan:1,extras:1,tiffinservice:1,totalPrice:1})
+                if(users_addToCart){
+                    res.status(201).json({
+                       users_addToCart
+                     });
+                }
+        }
+        catch(err){
+            console.error(err);
+            res.status(500).json({
+              error: 'Server error',
+            });
+          }
+    }
+  
+    module.exports.delete_cart_by_id=async(req,res,next)=>{
+      try{
+           const delete_cart=await addToCart.findByIdAndDelete({_id:req.params.id})
+           if(delete_cart){
+             res.status(201).json({
+              msg: "Items deleted from cart",
+             });
+           }
+           else{
+             res.json({
+               msg:"items not in cart",
+             });
+           }
+      }
+      catch(err)
+      {
+        console.error(err);
+        res.status(500).json({
+          error: 'Server error',
+        });
+      }
+
+      }
+    
