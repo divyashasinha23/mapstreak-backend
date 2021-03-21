@@ -6,7 +6,7 @@ const tiffinSchema = new mongoose.Schema
    
     _id:{
         type:String,
-        unique: true
+        // unique: true
       },
     image:{
       type: String
