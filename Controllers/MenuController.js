@@ -8,7 +8,7 @@ const Menu = require('../models/menuModel');
       const menu = await Menu.create(req.body);
       res.status(201).json({
         success:true,
-        data:menu,
+        data:menu,s
       });
     }
     catch(err){
