@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema
         required: [true, 'Please enter a password'],
     },
     image:{
-       type:String
+      type: String,
+    },
+    location:{
+      type:String,
     },
 
     uid:String,
@@ -34,7 +37,8 @@ const userSchema = new mongoose.Schema
     
 
 
-});
+},
+{timestamps: true});
 
 // bcrypting password
 userSchema.pre('save',async function(next){

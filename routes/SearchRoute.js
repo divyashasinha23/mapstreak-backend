@@ -4,9 +4,18 @@ const router = express.Router();
 
 router.get('/search', function(req,res,next) {
     var seacrhfield = req.query.name;
-    Tiffin.find({name:{$regex: seacrhfield, $options: '$i'}}).then((data) => {
-        res.status(200).json(data);
-    })
+    var query = req.query.address;
+    Tiffin.find({
+        $or: [
+            { name: { '$regex': seacrhfield, $options: 'i' } },
+            { address: { '$regex': query, $options: 'i' } }
+        ]
+    }).then((data) => {
+        res.json(data);
+    });
+    // Tiffin.find({name:{$regex: seacrhfield, $options: '$i'}}).then((data) => {
+    //     res.status(200).json(data);
+    // })
 });
 
 // router.get('/search', function(req,res,next) {

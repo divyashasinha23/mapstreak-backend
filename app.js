@@ -26,6 +26,7 @@ const customerorderRoute = require('./routes/CustomerOrderRoute');
 const searchRoute = require('./routes/SearchRoute');
 
 
+
 dotenv.config({ path: '.env' });
 connectDB();
 var app = express();
@@ -45,9 +46,10 @@ app.use(menuRoute);
 app.use(customerorderRoute);
 // app.use('/api',paymentRoute)
 app.use(searchRoute);
+
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
-app.use('/uploads', express.static('uploads'));
+
 
 
 app.use(passport.initialize());
