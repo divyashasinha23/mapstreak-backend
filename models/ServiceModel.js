@@ -12,7 +12,6 @@ const serviceSchema = new mongoose.Schema({
         type:String
     },
     location:{
-
     },
     coupon_company:{
         type:String
