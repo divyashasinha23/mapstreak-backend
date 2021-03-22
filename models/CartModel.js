@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
-
  const Extra = mongoose.Schema({
      name:{
          type:String
@@ -15,33 +12,36 @@ const mongoose = require("mongoose");
      }
  })
  
- const addToCartSchema = new mongoose.Schema({
+ const CartSchema = new mongoose.Schema({
    user:{
      type: mongoose.Schema.Types.ObjectId,
      ref: 'User',
      required:true,
   },
-  tiffinservice:{
-    type:String,
-    ref:'Tiffin',  
-},
    plan:{
     name:{
         type:String
     },
     Weekly_price: {
-        type:String
+        type:String,
+        default:0.00
     },
     Monthly_price:{
-        type:String
+        type:String,
+        default:0.00
     },
     Day_price:{
-        type:String
+        type:String,
+        default:0.00
       },
     image:{
         type:String
     },
-
+    tiffinservice:{
+        type:String,
+        ref:'Tiffin',  
+        required:true
+    },
    },
    extras:{
        extra1: [Extra],
@@ -81,11 +81,14 @@ const mongoose = require("mongoose");
        type:String
    },
    totalPrice:{
-    type:String
+    type:String,
+    required: true,
    }
- });
+ },
+ {timestamps: true},
+ );
  
 
- const addToCart = mongoose.model('addToCart', addToCartSchema);
+ const Cart = mongoose.model('Cart', CartSchema);
 
-module.exports = addToCart;
+module.exports = Cart;

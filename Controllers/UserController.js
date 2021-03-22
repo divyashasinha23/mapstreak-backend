@@ -221,34 +221,34 @@ catch(err){
     }
     }  
 
-    module.exports.update_profile_by_id = async(req,res) => {
-      try{
-      const {newname} = req.body;  
-      const {newemail} = req.body;
-      const {newMobileNumber} = req.body;
-      const {image} = req.body;
+    // module.exports.update_profile_by_id = async(req,res) => {
+    //   try{
+    //   const {newname} = req.body;  
+    //   const {newemail} = req.body;
+    //   const {newMobileNumber} = req.body;
+    //   const {image} = req.body;
       
       
 
-      await User.findOneAndUpdate({_id: req.params.id}, {
-        name: newname,
-        email:newemail,
-        mobile_no: newMobileNumber,
-        image : image
-      })
+    //   await User.findOneAndUpdate({_id: req.params.id}, {
+    //     name: newname,
+    //     email:newemail,
+    //     mobile_no: newMobileNumber,
+    //     image : image
+    //   })
   
-      res.json({
-        name: newname,
-        email: newemail,
-        mobile_no: newMobileNumber,
-        image: image,
-        msg:"profile updated successfully"
-      });
-    }
-    catch(err){
-      console.log(err);
-    }
-    } 
+    //   res.json({
+    //     name: newname,
+    //     email: newemail,
+    //     mobile_no: newMobileNumber,
+    //     image: image,
+    //     msg:"profile updated successfully"
+    //   });
+    // }
+    // catch(err){
+    //   console.log(err);
+    // }
+    // } 
 
 
 

@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const partnercontroller = require('../Controllers/partnercontroller');
-// const path = require('path');
 const nodemailer = require("nodemailer");
 const Partner = require('../models/partnerModel');
 const fs = require('fs');
-// var {Auth, currentUser} = require('../Middleware/MerchantMiddleware');
+const PartnerController = require('../Controllers/PartnerController');
+var {Auth, currentUser} = require('../Middleware/MerchantMiddleware');
 
 var path;
 
@@ -26,53 +25,48 @@ var Storage= multer.diskStorage({
     storage:Storage
   }).single('image');
 
-//  router.get('/partnerwithus', currentUser);
-//  router.get('/partnerwithus', Auth, partnercontroller.partner_get);
 
 
-router.post('/partnerwithus',(req,res) => {
-    upload(req,res,function(err){
-        if(err){
-            console.log(err)
-            return res.end("Something went wrong!");
-        }else{
-            var obj = {
-                                        outletName: req.body.outletName,
-                                        state: req.body.state,
-                                        city: req.body.city,
-                                        primary_location: req.body.primary_location,
-                                        pincode: req.body.pincode,
-                                        outlettype: {
-                                            Cloud_kitchen: req.body.outlettype1 ? true : false,
-                                            Resturent: req.body.outlettype2 ? true : false,
-                                            others: req.body.outlettype3 ? true : false,
-                                        },
-                                        contact_person:req.body.contactperson,
-                                        name:req.body.name,
-                                        phone_no: req.body.phone_no,
-                                        type_of_cusines: req.body.type_of_cusines,
-                                        services: {
-                                            delivery: req.body.services1 ? true : false,
-                                            walkin: req.body.services2 ? true : false,
-                                        },
-                                        specify: req.body.specify,
-                                        time_from: req.body.time_from,
-                                        time_to: req.body.time_to,
-                                        image: req.file.filename
-                    }
+router.post('/partnerwithus', PartnerController.post_form)
+            // var obj = {
+            //                             outletName: req.body.outletName,
+            //                             state: req.body.state,
+            //                             city: req.body.city,
+            //                             primary_location: req.body.primary_location,
+            //                             pincode: req.body.pincode,
+            //                             outlettype: {
+            //                                 Cloud_kitchen: req.body.outlettype1 ? true : false,
+            //                                 Resturent: req.body.outlettype2 ? true : false,
+            //                                 others: req.body.outlettype3 ? true : false,
+            //                             },
+            //                             contact_person:req.body.contactperson,
+            //                             name:req.body.name,
+            //                             phone_no: req.body.phone_no,
+            //                             type_of_cusines: req.body.type_of_cusines,
+            //                             services: {
+            //                                 delivery: req.body.services1 ? true : false,
+            //                                 walkin: req.body.services2 ? true : false,
+            //                             },
+            //                             specify: req.body.specify,
+            //                             time_from: req.body.time_from,
+            //                             time_to: req.body.time_to,
+                                        
+            //         }
                 
-                    Partner.create(obj, (err,item)=>{
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                           res.redirect('/submitted');
+            //        const partner = await Partner.create(obj, (err,item)=>{
+            //             if(err){
+            //                 console.log(err);
+            //             }
+            //             else{
+            //                res.json({
+            //                    outletName: req.body.outletName,
+            //                    _id: partner._id
+            //                })
                             
-                        }
-                    });
-                  }
-                });
-              });
+            //             }
+            //         });
+                  
+            //     });
             
 
   
