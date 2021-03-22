@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const plan1Schema = mongoose.Schema({
+const planSchema = mongoose.Schema({
    name:{
        type:String
    },
@@ -23,49 +23,7 @@ const plan1Schema = mongoose.Schema({
 },
 });
 
-const plan2Schema = mongoose.Schema({
-    name:{
-        type:String
-    },
-    Weekly_price: {
-        type:String
-    },
-    Monthly_price:{
-        type:String
-    },
-    Day_price:{
-        type:String
-      },
-    image:{
-        type:String
-    },
-    tiffinservice:{
-        type:String,
-        ref:'Tiffin'
-    },
- });
 
- const plan3Schema = mongoose.Schema({
-    name:{
-        type:String
-    },
-    Weekly_price: {
-        type:String
-    },
-    Monthly_price:{
-        type:String
-    },
-    Day_price:{
-        type:String
-      },
-    image:{
-        type:String
-    },
-    tiffinservice:{
-        type:String,
-        ref:'Tiffin'
-    },
- });
 
 const Extra = mongoose.Schema({
     name:{
@@ -82,20 +40,16 @@ const menuSchema = new mongoose.Schema({
       ref:'Tiffin',
       unique:true
   },
-  user:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
- },
   plan:{
       veg_plan:{
-          plan1:[plan1Schema],
-          plan2:[plan2Schema],
-          plan3:[plan3Schema]    
+          plan1:[planSchema],
+          plan2:[planSchema],
+          plan3:[planSchema]    
       },
       Nonveg_plan:{
-        plan1:[plan1Schema],
-        plan2:[plan2Schema],
-        plan3:[plan3Schema]    
+        plan1:[planSchema],
+        plan2:[planSchema],
+        plan3:[planSchema]    
       }
   },
   extras:{
