@@ -11,6 +11,9 @@ const tiffinSchema = new mongoose.Schema
     image:{
       type: String
     },
+    location:{
+
+    },
      name:{
      type: String
      },

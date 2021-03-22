@@ -11,9 +11,13 @@ const serviceSchema = new mongoose.Schema({
     image:{
         type:String
     },
+    location:{
+
+    },
     coupon_company:{
         type:String
-    }
+    },
+    
 });
 
 const service = mongoose.model('Service',serviceSchema);

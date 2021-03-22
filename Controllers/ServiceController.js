@@ -17,22 +17,6 @@ module.exports.get_services  = asyncHandler(async (req, res) => {
     }
   });
 
-  module.exports.post_services = async (req,res,next) => {
-    try{
-    const service = await Service.create(req.body);
-    res.status(201).json({
-     success: true,
-     data:service
-    });
-    
-  }
-  catch (err) {
-    console.error(err);
-    res.status(500).json({
-      error: 'Server error',
-    });
-  }
-  }
 
 
   
