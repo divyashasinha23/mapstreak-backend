@@ -14,18 +14,40 @@ router.get('/profile',requireAuth,UserController.get_profile);
 router.get('/profile/:id', UserController.get_profile_by_id);
 router.post('/update-profile', current_User);
 router.post('/update-profile', UserController.update_profile);
+
 router.post('/update-profile/:id',   (req,res) => {
    Upload(req,res, (error => {
    if(error){
        console.log(error);
    }
    else{
+      if(req.file === undefined){
+         var obj = {
+            name: req.body.name,
+            email : req.body.email,
+            mobile_no : req.body.mobile_no,
+            }
+      
+             User.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
+              if(err){
+                  console.log(err);
+                   }
+                   else{
+                   res.status(201).json({
+                      obj,
+                      msg:"profile updated successfully"
+                   })
+                                   
+                  }
+            });
+      }
+   else{
       var obj = {
       name: req.body.name,
       email : req.body.email,
       mobile_no : req.body.mobile_no,
-     image : req.file.key,
-     location : req.file.location
+      image : req.file.key,
+      location : req.file.location
       }
 
        User.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
@@ -41,7 +63,7 @@ router.post('/update-profile/:id',   (req,res) => {
             }
       });
    }
-
+   }
 }));
 });
 
