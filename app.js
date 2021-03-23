@@ -24,7 +24,9 @@ const customerorderRoute = require('./routes/CustomerOrderRoute');
 // const paymentRoute=require('./routes/PaymentRoute');
 // const {v4:uuidv4}=require('uuid')
 const searchRoute = require('./routes/SearchRoute');
-const CartRoute=require('./routes/CartRoute')
+const CartRoute=require('./routes/CartRoute');
+const AdminRoute=require('./routes/AdminRoute');
+const Admin=require('./models/AdminModel');
 
 
 dotenv.config({ path: '.env' });
@@ -47,6 +49,8 @@ app.use(customerorderRoute);
 // app.use('/api',paymentRoute)
 app.use(searchRoute);
 app.use(CartRoute);
+app.use(AdminRoute);
+
 app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 

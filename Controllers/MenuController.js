@@ -46,3 +46,27 @@ const Menu = require('../models/menuModel');
       });
     }
   };
+
+  module.exports.update_menu_tiffin_by_id=async(req,res,next)=>{
+  try{
+    const {plan} = req.plan;  
+    const {extras} = req.extras;
+    const {coupon} = req.coupon;
+    await Menu.findOneAndUpdate({_id: req.params.id}, {
+      plan: newplan,
+     extras:newextras,
+      coupon: newcoupon,
+      
+    })
+    res.json({
+      name: newname,
+      email: newemail,
+      mobile_no: newMobileNumber,
+      image: image,
+      msg:"Menu updated successfully"
+    });
+  }
+  catch(err){
+    console.log(err);
+  }
+  } 
