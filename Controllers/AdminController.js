@@ -111,38 +111,38 @@ module.exports.admin_post_login = async (req,res) => {
   
 //update-profile
 
-module.exports.update_profile = async(req,res) => {
-    try{
-    const {newemail} = req.body;
-    const {newMobileNumber} = req.body;
-    const {image} = req.body;
+// module.exports.update_profile = async(req,res) => {
+//     try{
+//     const {newemail} = req.body;
+//     const {newMobileNumber} = req.body;
+//     const {image} = req.body;
   
-    await Admin.findOneAndUpdate({_id: res.locals.Admin._id}, {
-      email:newemail,
-      mobile_no: newMobileNumber,
-      image: image
-    })
+//     await Admin.findOneAndUpdate({_id: res.locals.Admin._id}, {
+//       email:newemail,
+//       mobile_no: newMobileNumber,
+//       image: image
+//     })
   
-    res.json({
-      email: newemail,
-      mobile_no: newMobileNumber,
-      image: image
-    });
-  }
-  catch(err){
-    console.log(err);
-  }
-  }  
+//     res.json({
+//       email: newemail,
+//       mobile_no: newMobileNumber,
+//       image: image
+//     });
+//   }
+//   catch(err){
+//     console.log(err);
+//   }
+//   }  
   
-  //profile
+  // profile
   
-  module.exports.get_profile = async (req, res) => {
+  module.exports.admin_get_profile= async (req, res) => {
     try{
     const admin = await Admin.findById(res.locals.admin);
   
-    if (this.admin_post_login) {
+    if (admin) {
       res.json({
-        name: admin.full_name,
+        name: admin.name,
         mobile_no:admin.mobile_no,
         email: admin.email,
         password: admin.password,
@@ -157,3 +157,33 @@ module.exports.update_profile = async(req,res) => {
     console.log(err);
   }
   };
+ 
+  
+
+// get-profile by id
+
+module.exports.admin_get_profile_by_Id= async (req, res) => {
+  try{
+  const admin = await Admin.findById(req.params.id);
+
+  if (admin) {
+    res.json({
+      _id: admin._id,
+      name: admin.name,
+      email: admin.email,
+      mobile_no: admin.mobile_no,
+      image: admin.image
+    });
+  } else {
+    res.status(404);
+    throw new Error('admin not found');
+  }
+}
+catch(err){
+  console.log(err);
+}
+};
+
+
+
+
