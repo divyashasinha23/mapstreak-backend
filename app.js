@@ -28,6 +28,7 @@ const CartRoute=require('./routes/CartRoute');
 const TiffinRoute = require('./routes/TiffinRoute');
 const UpdateRoute = require('./routes/UpdatesRoute');
 const AdminRoute=require('./routes/AdminRoute');
+const SliderRoute = require('./routes/SliderImageRoute');
 
 
 
@@ -55,8 +56,7 @@ app.use(CartRoute);
 app.use(TiffinRoute);
 app.use(UpdateRoute);
 app.use(AdminRoute);
-
-app.use('/tiffinservices', require('./routes/TiffinRoute'));
+app.use(SliderRoute);
 
 
 

@@ -6,7 +6,7 @@ const {requireAuth_admin, currentAdmin} = require('../Middleware/AdminMiddleware
 const Upload = require('../Middleware/upload');
 const Merchant = require('../models/merchantModel');
 const Tiffin = require('../models/tiffinServiceModel');
-const { requireAuth } = require('../Middleware/UserMiddleware');
+
 
 
 //Merchant or Admin can post a tiffinservice
