@@ -6,6 +6,7 @@ const { Auth,currentMerchant } = require('../Middleware/MerchantMiddleware');
 const Upload = require('../Middleware/upload');
 const Tiffin = require('../models/tiffinServiceModel');
 const Merchant = require('../models/merchantModel');
+const UpdateController = require('../Controllers/UpdateController');
 const router = express.Router();
 
 // Updates can be performed by merchant or Admin

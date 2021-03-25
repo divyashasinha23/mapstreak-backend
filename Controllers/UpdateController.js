@@ -8,12 +8,12 @@ module.exports.delete_tiffin_service = async(req,res) => {
     const delete_service = await Tiffin.findOneAndDelete({_id: req.params.id});
     if(delete_service){
         res.status(201).json({
-            msg:"Tiffin Service Deleted";
+            msg:"Tiffin Service Deleted"
         });
     }
     else{
         res.json({
-            msg: "No Such service Found";
+            msg: "No Such service Found"
         });
     }
 }
