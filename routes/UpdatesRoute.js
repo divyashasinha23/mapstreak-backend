@@ -1,5 +1,5 @@
 //Updates of Tiffin Services, Menu 
-//All updates that are done by Admin and vendor
+//All updates are done by Admin and vendor
 
 const express = require('express');
 const { Auth,currentMerchant } = require('../Middleware/MerchantMiddleware');
@@ -90,6 +90,8 @@ router.post('/update-tiffin-service/:id', Auth, async (req,res) => {
 catch(err){
     console.log(err);
 }
-})
+});
+router.get('/delete-tiffin-service/:id', currentMerchant);
+router.get('/delete-tiffin-service/:id', Auth, UpdateController.delete_tiffin_service);
 
 module.exports = router;
