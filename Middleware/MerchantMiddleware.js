@@ -7,7 +7,8 @@ const Auth = (req,res,next) => {
     if(token){
         jwt.verify(token, 'mapstreak-merchant', (err,decodedToken) => {
             if(err){
-                res.redirect('/merchant_signup');
+                // res.redirect('/merchant_signup');
+                res.send('Your are not logged in')
             }
             else{
                 console.log(decodedToken)
@@ -16,7 +17,8 @@ const Auth = (req,res,next) => {
         });
     }
     else{
-        res.redirect('/merchant_signup');
+        // res.redirect('/merchant_signup');
+        res.send('Your are not logged in')
     }
 };
 
