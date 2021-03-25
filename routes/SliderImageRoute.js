@@ -9,7 +9,7 @@ router.get('/slider-images', SliderController.show_slider_image);
 router.post('/slider-images', (req,res) => {
     Upload(req,res, (error => {
         if(error){
-            console.log('error');
+            console.log(error);
         }
         else{
             var obj= {
