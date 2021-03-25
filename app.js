@@ -27,6 +27,8 @@ const searchRoute = require('./routes/SearchRoute');
 const CartRoute=require('./routes/CartRoute');
 const TiffinRoute = require('./routes/TiffinRoute');
 const UpdateRoute = require('./routes/UpdatesRoute');
+const AdminRoute=require('./routes/AdminRoute');
+
 
 
 dotenv.config({ path: '.env' });
@@ -52,6 +54,9 @@ app.use(CartRoute);
 // app.use('/tiffinservices', require('./routes/TiffinRoute'));
 app.use(TiffinRoute);
 app.use(UpdateRoute);
+app.use(AdminRoute);
+
+app.use('/tiffinservices', require('./routes/TiffinRoute'));
 
 
 

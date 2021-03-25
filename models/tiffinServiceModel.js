@@ -14,7 +14,7 @@ const tiffinSchema = new mongoose.Schema
     }, 
     Admin:{
       type: mongoose.Schema.Types.ObjectId,
-      ref:'Merchant'
+      ref:'Admin'
     },
     image:{
       type: String
