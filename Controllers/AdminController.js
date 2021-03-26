@@ -111,29 +111,35 @@ module.exports.admin_post_login = async (req,res) => {
   
 //update-profile
 
-// module.exports.update_profile = async(req,res) => {
-//     try{
-//     const {newemail} = req.body;
-//     const {newMobileNumber} = req.body;
-//     const {image} = req.body;
-  
-//     await Admin.findOneAndUpdate({_id: res.locals.Admin._id}, {
-//       email:newemail,
-//       mobile_no: newMobileNumber,
-//       image: image
-//     })
-  
-//     res.json({
-//       email: newemail,
-//       mobile_no: newMobileNumber,
-//       image: image
-//     });
-//   }
-//   catch(err){
-//     console.log(err);
-//   }
-//   }  
-  
+
+module.exports.update_admin_profile = async(req,res) => {
+  try{
+  const {newname} = req.body; 
+  const {newemail} = req.body;
+  const {newMobileNumber} = req.body;
+  const {image} = req.body;
+
+
+  await Admin.findOneAndUpdate({_id: res.locals.admin._id}, {
+    name: newname,
+    email:newemail,
+    mobile_no: newMobileNumber,
+    image: image
+  })
+
+  res.json({
+    name: newname,
+    email: newemail,
+    mobile_no: newMobileNumber,
+    image: image,
+    msg:"profile updated successfully"
+  });
+}
+catch(err){
+  console.log(err);
+}
+}  
+
   // profile
   
   module.exports.admin_get_profile= async (req, res) => {
