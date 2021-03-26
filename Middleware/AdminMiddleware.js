@@ -7,7 +7,8 @@ const requireAuth_admin = (req,res,next) => {
     if(token){
         jwt.verify(token, 'mapstreak-admin', (err,decodedToken) => {
             if(err){
-                res.redirect('/admin_signup');
+                // res.redirect('/admin_signup');
+                res.send('You are not logged in');
             }
             else{
                 console.log(decodedToken)
@@ -16,7 +17,8 @@ const requireAuth_admin = (req,res,next) => {
         });
     }
     else{
-        res.redirect('/admin_signup');
+        // res.redirect('/admin_signup');
+        res.send('You are not logged in');
     }
 };
 

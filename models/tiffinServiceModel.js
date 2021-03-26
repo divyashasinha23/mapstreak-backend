@@ -1,13 +1,21 @@
 const mongoose=require("mongoose");
-const geocoder = require('../utils/geocoder');
+// const geocoder = require('../utils/geocoder');
 
 const tiffinSchema = new mongoose.Schema
 ({
    
     _id:{
         type:String,
-        // unique: true
+        unique: true
       },
+    Merchant:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Merchant'
+    }, 
+    Admin:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Admin'
+    },
     image:{
       type: String
     },
@@ -37,22 +45,26 @@ const tiffinSchema = new mongoose.Schema
           ref:'Service',
           unique:true
      },
- location:{
-     //GeoJSON Point
-     type: {
-        type: String, 
-        enum: ['Point'], 
-      },
-      coordinates: {
-        type: [Number],
-        index: '2dsphere'
-      },
-      formattedAddress: String,
-      street: String,
-      city: String,
-      state: String,
-      country: String,
+     isOpen:{
+       type: Boolean,
+       deafult: false
      },
+//  location:{
+//      //GeoJSON Point
+//      type: {
+//         type: String, 
+//         enum: ['Point'], 
+//       },
+//       coordinates: {
+//         type: [Number],
+//         index: '2dsphere'
+//       },
+//       formattedAddress: String,
+//       street: String,
+//       city: String,
+//       state: String,
+//       country: String,
+//      },
  Rating:{
      type:Number
  },
@@ -63,18 +75,18 @@ const tiffinSchema = new mongoose.Schema
 });
 
 //Geocoder 
-tiffinSchema.pre('save', async function(next) {
- const loc = await geocoder.geocode(this.address);
- this.location = {
-     type: 'point',
-     coordinates: [loc[0].longitude, loc[0].latitude],
-     formattedAddress: loc[0].formattedAddress,
-     street: loc[0].streetName,
-     city: loc[0].city,
-     zipcode: loc[0].zipcode,
-     country: loc[0].countryCode
- };
-});
+// tiffinSchema.pre('save', async function(next) {
+//  const loc = await geocoder.geocode(this.address);
+//  this.location = {
+//      type: 'point',
+//      coordinates: [loc[0].longitude, loc[0].latitude],
+//      formattedAddress: loc[0].formattedAddress,
+//      street: loc[0].streetName,
+//      city: loc[0].city,
+//      zipcode: loc[0].zipcode,
+//      country: loc[0].countryCode
+//  };
+// });
 
 
 const Tiffin= mongoose.model('Tiffin', tiffinSchema);

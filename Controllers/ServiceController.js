@@ -18,5 +18,28 @@ module.exports.get_services  = asyncHandler(async (req, res) => {
   });
 
 
+  module.exports.delete_service = async(req,res) => {
+    try{
+    const delete_Service = await Service.findOneAndDelete({_id: req.params.id});
+    if(delete_Service){
+      res.status(201).json({
+        msg:"Service Deleted Successfully",
+      });
+    }
+    else{
+      res.json({
+        msg: "No such Service found",
+      });
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(400).json({
+      msg: "Server Error"
+    });
+  }
+
+  }
+
 
   

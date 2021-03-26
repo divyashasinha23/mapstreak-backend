@@ -13,7 +13,7 @@ router.get('/profile',current_User);
 router.get('/profile',requireAuth,UserController.get_profile);
 router.get('/profile/:id', UserController.get_profile_by_id);
 router.post('/update-profile', current_User);
-router.post('/update-profile', UserController.update_profile);
+router.post('/update-profile', requireAuth, UserController.update_profile);
 
 router.post('/update-profile/:id',   (req,res) => {
    Upload(req,res, (error => {
