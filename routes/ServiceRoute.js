@@ -106,6 +106,7 @@ router.post('/Mapstreak-Services-Update/:id',   (req,res) => {
  }));
  });
  
+ //delete the services by service ID
  router.get('/delete-service/:id', ServiceController.delete_service);
 
 

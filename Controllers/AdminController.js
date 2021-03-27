@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/AdminModel');
+const Tiffin = require('../models/tiffinServiceModel');
 
 
 //create token
@@ -183,6 +184,55 @@ catch(err){
   console.log(err);
 }
 };
+
+
+// delete tiffinservice
+
+module.exports.delete_tiffinservice = async(req,res) => {
+  try{
+   const delete_tiffin_service = await Tiffin.findByIdAndDelete(req.params.id);
+   if(delete_tiffin_service){
+     res.status(200).json({
+       msg: "Service deleted"
+     });
+   }
+   else{
+     throw new Error("No Tiffin service found");
+   }
+  }
+  catch(err){
+    console.log(err);
+    res.status(400).json({
+      msg: "servcer error"
+    })
+  }
+}
+
+// view all tiffinservices
+
+module.exports.view_tiffinservice = async(req,res) => {
+  try{
+    const tiffinservice = await Tiffin.find();
+    if(tiffinservice){
+      res.status(200).json({
+        success: true,
+        data: tiffinservice,
+        count: tiffinservice.length
+      });
+    }
+    else{
+      res.status(200).json({
+        msg: "No Tiffin service available"
+      });
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(400).json({
+      msg: 'Server Error'
+    });
+  }
+}
 
 
 
