@@ -3,13 +3,10 @@ const router=express.Router();
 const adminController=require('../Controllers/AdminController');
 const {requireAuth_admin, currentAdmin} = require('../Middleware/AdminMiddleware');
 const Admin = require('../models/AdminModel');
-<<<<<<< HEAD
 const Upload = require('../Middleware/upload')
 
-=======
 
 //admin login and signup credentials
->>>>>>> 6e44c17171e6309125d8775cb033a6cd49393db2
 router.post('/admin_login',adminController.admin_post_login);
 router.post('/admin_signup',adminController.admin_post_signup);
 
