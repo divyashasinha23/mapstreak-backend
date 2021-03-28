@@ -97,10 +97,10 @@ catch(err){
 
 
 //view all tiffinservices
-router.get('/all-tiffinservices')
 router.get('/all-tiffinservices', adminController.view_tiffinservice);
 
 //view all services
+router.get('/all-services', adminController.view_services);
 
 
 

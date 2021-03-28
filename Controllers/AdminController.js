@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/AdminModel');
+const service = require('../models/ServiceModel');
 const Tiffin = require('../models/tiffinServiceModel');
 
 
@@ -213,7 +214,7 @@ module.exports.delete_tiffinservice = async(req,res) => {
 module.exports.view_tiffinservice = async(req,res) => {
   try{
     const tiffinservice = await Tiffin.find();
-    if(tiffinservice){
+    if(tiffinservice.length !== 0){
       res.status(200).json({
         success: true,
         data: tiffinservice,
@@ -234,6 +235,28 @@ module.exports.view_tiffinservice = async(req,res) => {
   }
 }
 
+module.exports.view_services = async(req,res) => {
+  try{
+  const service = await service.find();
+  if(service.length !== 0){
+    res.status(200).json({
+      data: service,
+      count: service.length
+    });
+  }
+  else{
+    res.status(200).json({
+      msg: "No service available"
+    });
+  }
+}
+catch(err){
+  console.log(err);
+  res.status(400).json({
+    msg: 'Server Error'
+  });
+}
+}
 
 
 
