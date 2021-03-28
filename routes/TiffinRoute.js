@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const TiffinContoller = require('../Controllers/TiffinController');
 const {Auth, currentMerchant} = require('../Middleware/MerchantMiddleware');
-const {requireAuth_admin, currentAdmin} = require('../Middleware/AdminMiddleware');
 const Upload = require('../Middleware/upload');
 const Merchant = require('../models/merchantModel');
 const Tiffin = require('../models/tiffinServiceModel');
@@ -30,7 +29,8 @@ router.get('/Tiffin-service', Auth, async(res,req)=> {
 router.post('/add-Tiffin-service', currentMerchant);
 router.post('/add-Tiffin-service' , Auth, async(req,res) => {
     try{
-     const user = await { $or: [{Merchant: res.locals.merchant}, {Admin: res.locals.admin}] };
+    //  const user = await { $or: [{Merchant: res.locals.merchant}, {Admin: res.locals.admin}] };
+    const user = await Merchant.findById(res.locals.merchant);
      if(user){
         Upload(req,res, (error => {
             if(error){
@@ -97,7 +97,7 @@ router.post('/add-Tiffin-service' , Auth, async(req,res) => {
         }))
      }   
      else{
-         throw Error('Seems like you are not logged in/ Permision Denied');
+         res.send('Seems like you are not logged in/ Permision Denied');
      }
    
 }

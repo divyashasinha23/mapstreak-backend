@@ -26,6 +26,9 @@ const Order = require('../models/orderModel');
                user_orders
             });
           }
+          else{
+            throw new Error("No order items");
+          }
         }
       catch(err){
         console.error(err);

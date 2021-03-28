@@ -34,9 +34,6 @@ const mongoose = require("mongoose");
         type:String,
         default:0.00
       },
-    image:{
-        type:String
-    },
     tiffinservice:{
         type:String,
         ref:'Tiffin',  
