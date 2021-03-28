@@ -5,9 +5,14 @@ const router = express.Router();
 ServiceController = require('../Controllers/ServiceController');
 const Upload = require('../Middleware/upload');
 const service = require('../models/ServiceModel');
+const {requireAuth_admin, currentAdmin} = require('../Middleware/AdminMiddleware');
 
 router.get('/Mapstreak-Services/:id',ServiceController.get_services_by_id);
-router.post('/Mapstreak-Services',(req,res) =>{
+
+
+//admin can post services
+router.post('/Mapstreak-Services', currentAdmin)
+router.post('/Mapstreak-Services', requireAuth_admin, (req,res) =>{
  Upload(req,res, (error => {
      if(error){
          console.log(error);
@@ -55,10 +60,13 @@ router.post('/Mapstreak-Services',(req,res) =>{
     }
  }))
 });
+
+//All services will be viewed in User App.
 router.get('/Mapstreak-Services',ServiceController.get_services);
 
-//update services using service id
-router.post('/Mapstreak-Services-Update/:id',   (req,res) => {
+//update services using service id (Admin Roles)
+router.post('/Mapstreak-Services-Update/:id', currentAdmin);
+router.post('/Mapstreak-Services-Update/:id', requireAuth_admin,   (req,res) => {
     Upload(req,res, (error => {
     if(error){
         console.log(error);
@@ -108,8 +116,9 @@ router.post('/Mapstreak-Services-Update/:id',   (req,res) => {
  }));
  });
  
- //delete the services by service ID
- router.get('/delete-service/:id', ServiceController.delete_service);
+ //delete the services by service ID(Admin roles)
+ router.get('/delete-service/:id', currentAdmin);
+ router.get('/delete-service/:id', requireAuth_admin, ServiceController.delete_service);
 
 
 
