@@ -5,17 +5,20 @@ const {requireAuth, current_User} = require('../Middleware/UserMiddleware');
 const Upload = require('../Middleware/upload');
 const User = require('../models/User');
 
-
+//login and signup credentials
 router.post('/login',UserController.post_login);
-// console.log(req.file);
 router.post('/signup',UserController.post_signup);
+
+//view profile of user
 router.get('/profile',current_User);
 router.get('/profile',requireAuth,UserController.get_profile);
-router.get('/profile/:id', UserController.get_profile_by_id);
-router.post('/update-profile', current_User);
-router.post('/update-profile', requireAuth, UserController.update_profile);
+// router.get('/profile/:id', UserController.get_profile_by_id);
 
-router.post('/update-profile/:id',   (req,res) => {
+//update user profile
+router.post('/update-profile', current_User);
+// router.post('/update-profile', requireAuth, UserController.update_profile);
+
+router.post('/update-profile', requireAuth,   (req,res) => {
    Upload(req,res, (error => {
    if(error){
        console.log(error);
@@ -28,7 +31,7 @@ router.post('/update-profile/:id',   (req,res) => {
             mobile_no : req.body.mobile_no,
             }
       
-             User.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
+             User.findOneAndUpdate({_id: res.locals.user}, obj, (err,item) => {
               if(err){
                   console.log(err);
                    }
@@ -50,7 +53,7 @@ router.post('/update-profile/:id',   (req,res) => {
       location : req.file.location
       }
 
-       User.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
+       User.findOneAndUpdate({_id: res.locals.user}, obj, (err,item) => {
         if(err){
             console.log(err);
              }
@@ -66,10 +69,6 @@ router.post('/update-profile/:id',   (req,res) => {
    }
 }));
 });
-
-
-
-
 
 
 router.post('/forgot-password',UserController.post_forgotpassword);

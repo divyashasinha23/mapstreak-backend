@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema
       type: String,
     },
     location:{
-      type:String,
+      
     },
 
     uid:String,

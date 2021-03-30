@@ -5,6 +5,8 @@ const {requireAuth_admin, currentAdmin} = require('../Middleware/AdminMiddleware
 const Admin = require('../models/AdminModel');
 const Upload = require('../Middleware/upload')
 
+                           // ADMIN PERSONAL ACCOUNT INFORMATION// 
+
 
 //admin login and signup credentials
 router.post('/admin_login',adminController.admin_post_login);
@@ -13,13 +15,11 @@ router.post('/admin_signup',adminController.admin_post_signup);
 //view admin profile
 router.get('/admin_profile',currentAdmin);
 router.get('/admin_profile',requireAuth_admin,adminController.admin_get_profile);
-router.get('/admin_profile/:id', adminController.admin_get_profile_by_Id);
 
 
+//update admin profile
 router.post('/update-admin_profile', currentAdmin);
-router.post('/update-admin_profile',requireAuth_admin, adminController.update_admin_profile);
-
-router.post('/update-admin-profile/:id', (req,res) => {
+router.post('/update-admin-profile', requireAuth_admin, (req,res) => {
     Upload(req,res, (error => {
     if(error){
         console.log(error);
@@ -32,7 +32,7 @@ router.post('/update-admin-profile/:id', (req,res) => {
              mobile_no : req.body.mobile_no,
              }
        
-              Admin.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
+              Admin.findOneAndUpdate({_id: res.locals.admin._id}, obj, (err,item) => {
                if(err){
                    console.log(err);
                     }
@@ -51,10 +51,11 @@ router.post('/update-admin-profile/:id', (req,res) => {
        email : req.body.email,
        mobile_no : req.body.mobile_no,
        image : req.file.key,
+       location: req.file.location,
     
        }
  
-        Admin.findOneAndUpdate({_id: req.params.id}, obj, (err,item) => {
+        Admin.findOneAndUpdate({_id: res.locals.admin._id}, obj, (err,item) => {
          if(err){
              console.log(err);
               }
@@ -70,19 +71,17 @@ router.post('/update-admin-profile/:id', (req,res) => {
     }
  }));
  });
+
+
+
+                                  //ADMIN ACCESS ON MERCHANT'S APP//
  
 
-
-
-
-
-
-
-//update and remove access on merchnats.
+//update and remove access on merchnat's tiffinservices.
 router.post('/delete-tiffinservice/:id',currentAdmin);
 router.post('/delete-tiffinservice/:id', requireAuth_admin, adminController.delete_tiffinservice);
 
-//update
+//update tiffinservice by id
 router.post('/update-tiffinservice', currentAdmin);
 router.post('/update-tiffinservice/:id', requireAuth_admin, async (req,res) => {
     try{
