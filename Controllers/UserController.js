@@ -264,7 +264,8 @@ catch(err){
           name: user.name,
           email: user.email,
           mobile_no: user.mobile_no,
-          image: user.image
+          image: user.image,
+          location: user.location
         });
       } else {
         res.status(404);
