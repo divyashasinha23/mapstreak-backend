@@ -20,7 +20,7 @@ module.exports.post_addToCart= async(req,res) => {
 
     module.exports.get_cart_details_by_id=async(req,res,next)=>{
         try{
-            const users_addToCart=await Cart.find({user:req.params.id},{plan:1,extras:1,tiffinservice:1,totalPrice:1})
+            const users_addToCart=await Cart.find({user: res.locals.user},{plan:1,extras:1,tiffinservice:1,totalPrice:1})
                 if(users_addToCart){
                     res.status(201).json({
                        users_addToCart

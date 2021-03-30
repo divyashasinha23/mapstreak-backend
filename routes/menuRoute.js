@@ -9,7 +9,7 @@ router.get('/menu',menuController.get_menu_tiffin);
 router.get('/menu/:id',menuController.get_menu_tiffin_by_id);
 
 //merchant can post menu
-router,post('/menu', currentMerchant);
+router.post('/menu', currentMerchant);
 router.post('/menu', Auth, menuController.post_menu_tiffin);
 
 
