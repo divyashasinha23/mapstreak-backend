@@ -12,7 +12,7 @@ const router = express.Router();
 // Updates can be performed by merchant or Admin
 
 
-router.post('/update-tiffin-service', currentMerchant);
+router.post('/update-tiffin-service/:id', currentMerchant);
 //update by tiffinservice id
 router.post('/update-tiffin-service/:id', Auth, async (req,res) => {
     try{
