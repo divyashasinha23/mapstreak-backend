@@ -12,12 +12,4 @@ router.post('/menu', menuController.post_menu_tiffin);
 // update menu by menu id
 
 
-
-
-
-
-
-
-
-
 module.exports = router;
