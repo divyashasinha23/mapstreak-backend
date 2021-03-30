@@ -21,10 +21,15 @@ module.exports.post_addToCart= async(req,res) => {
     module.exports.get_cart_details_by_id=async(req,res,next)=>{
         try{
             const users_addToCart=await Cart.find({user: res.locals.user},{plan:1,extras:1,tiffinservice:1,totalPrice:1})
-                if(users_addToCart){
+                if(users_addToCart.length !== 0){
                     res.status(201).json({
                        users_addToCart
                      });
+                }
+                else{
+                  res.status(200).json({
+                    msg: 'No Items Added yet'
+                  })
                 }
         }
         catch(err){
