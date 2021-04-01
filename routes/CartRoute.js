@@ -13,6 +13,7 @@ router.get('/get-cart-details', current_User);
 router.get('/get-cart-details', requireAuth, addToCartController.get_cart_details_by_id);
 
 //delete items from cart using cart-id
+
 router.get('/delete-from-cart/:id',addToCartController.delete_cart_by_id);
 
 module.exports = router;
