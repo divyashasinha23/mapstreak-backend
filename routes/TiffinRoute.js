@@ -8,15 +8,23 @@ const Tiffin = require('../models/tiffinServiceModel');
 
 
 
-//Merchant or Admin can post a tiffinservice
+//Merchant can post a tiffinservice
 router.get('/Tiffin-service', currentMerchant);
 router.get('/Tiffin-service', Auth, async(res,req)=> {
      try{
         const user = await Merchant.findById(res.locals.merchant);
         if(user){
-            res.json({
-                user,
-            });
+           const all_tiffin_services = await Tiffin.find(user);
+           if(all_tiffin_services !== 0){
+               res.status(200).json({
+                   data: all_tiffin_services,
+               });
+           } 
+           else{
+               res.status(200).json({
+                   msg: "You do not have any active tiffin service yet"
+               });
+           }
         }
         else{
             throw Error('Seems like you are not logged in/ Permision Denied');
@@ -29,7 +37,6 @@ router.get('/Tiffin-service', Auth, async(res,req)=> {
 router.post('/add-Tiffin-service', currentMerchant);
 router.post('/add-Tiffin-service' , Auth, async(req,res) => {
     try{
-    //  const user = await { $or: [{Merchant: res.locals.merchant}, {Admin: res.locals.admin}] };
     const user = await Merchant.findById(res.locals.merchant);
      if(user){
         Upload(req,res, (error => {

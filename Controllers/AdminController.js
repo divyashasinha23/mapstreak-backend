@@ -49,13 +49,12 @@ const handleErrors = (err) => {
 
 //signup
 
-
 module.exports.admin_post_signup= async(req,res)=>
 {
-  const {name,email,password,mobile_no,image}=req.body;
+  const {name,email,password,mobile_no}=req.body;
  
   try{
-       const admin=await Admin.create({name,email,password,mobile_no,image});
+       const admin=await Admin.create({name,email,password,mobile_no});
        const token =createToken(admin._id);
        res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
        if(admin){
@@ -66,7 +65,6 @@ module.exports.admin_post_signup= async(req,res)=>
            password:admin.password,
            email:admin.email,   
            mobile_no:admin.mobile_no,
-           image:admin.image,
            token:token
          });
        }
@@ -114,33 +112,33 @@ module.exports.admin_post_login = async (req,res) => {
 //update-profile
 
 
-module.exports.update_admin_profile = async(req,res) => {
-  try{
-  const {newname} = req.body; 
-  const {newemail} = req.body;
-  const {newMobileNumber} = req.body;
-  const {image} = req.body;
+// module.exports.update_admin_profile = async(req,res) => {
+//   try{
+//   const {newname} = req.body; 
+//   const {newemail} = req.body;
+//   const {newMobileNumber} = req.body;
+//   const {image} = req.body;
 
 
-  await Admin.findOneAndUpdate({_id: res.locals.admin._id}, {
-    name: newname,
-    email:newemail,
-    mobile_no: newMobileNumber,
-    image: image
-  })
+//   await Admin.findOneAndUpdate({_id: res.locals.admin._id}, {
+//     name: newname,
+//     email:newemail,
+//     mobile_no: newMobileNumber,
+//     image: image
+//   })
 
-  res.json({
-    name: newname,
-    email: newemail,
-    mobile_no: newMobileNumber,
-    image: image,
-    msg:"profile updated successfully"
-  });
-}
-catch(err){
-  console.log(err);
-}
-}  
+//   res.json({
+//     name: newname,
+//     email: newemail,
+//     mobile_no: newMobileNumber,
+//     image: image,
+//     msg:"profile updated successfully"
+//   });
+// }
+// catch(err){
+//   console.log(err);
+// }
+// }  
 
   // profile
   
@@ -153,7 +151,7 @@ catch(err){
         name: admin.name,
         mobile_no:admin.mobile_no,
         email: admin.email,
-        password: admin.password,
+        image: admin.image,
       
       });
     } else {
@@ -170,27 +168,27 @@ catch(err){
 
 // get-profile by id
 
-module.exports.admin_get_profile_by_Id= async (req, res) => {
-  try{
-  const admin = await Admin.findById(req.params.id);
+// module.exports.admin_get_profile_by_Id= async (req, res) => {
+//   try{
+//   const admin = await Admin.findById(req.params.id);
 
-  if (admin) {
-    res.json({
-      _id: admin._id,
-      name: admin.name,
-      email: admin.email,
-      mobile_no: admin.mobile_no,
-      image: admin.image
-    });
-  } else {
-    res.status(404);
-    throw new Error('admin not found');
-  }
-}
-catch(err){
-  console.log(err);
-}
-};
+//   if (admin) {
+//     res.json({
+//       _id: admin._id,
+//       name: admin.name,
+//       email: admin.email,
+//       mobile_no: admin.mobile_no,
+//       image: admin.image
+//     });
+//   } else {
+//     res.status(404);
+//     throw new Error('admin not found');
+//   }
+// }
+// catch(err){
+//   console.log(err);
+// }
+// };
 
 
 // delete tiffinservice
@@ -241,13 +239,15 @@ module.exports.view_tiffinservice = async(req,res) => {
   }
 }
 
+// view all services
+
 module.exports.view_services = async(req,res) => {
   try{
-  const service = await service.find();
-  if(service.length !== 0){
+  const services = await service.find();
+  if(services.length !== 0){
     res.status(200).json({
-      data: service,
-      count: service.length
+      data: services,
+      count: services.length
     });
   }
   else{

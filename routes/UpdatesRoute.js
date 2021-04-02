@@ -1,5 +1,5 @@
 //Updates of Tiffin Services, Menu 
-//All updates are done by Admin and vendor
+//All updates are done by Merchant
 
 const express = require('express');
 const { Auth,currentMerchant } = require('../Middleware/MerchantMiddleware');
@@ -10,19 +10,10 @@ const UpdateController = require('../Controllers/UpdateController');
 const router = express.Router();
 
 // Updates can be performed by merchant or Admin
-router.get('/update-tiffin-service/:userid', (req,res) => {
-    const user = Tiffin.findOne({$or: [{Merchant: req.params.userid}, {Admin: req.params.userid}]});
-    if(user){
-        res.json({
-            data:user
-        });
-    }
-    else{
-        throw Error("Seems like you are not logged in/ Permision Denied");
-    }
 
-});
-router.post('/update-tiffin-service', currentMerchant);
+
+router.post('/update-tiffin-service/:id', currentMerchant);
+//update by tiffinservice id
 router.post('/update-tiffin-service/:id', Auth, async (req,res) => {
     try{
     const user = await Merchant.findById(res.locals.merchant);

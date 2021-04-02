@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Merchant = require("./merchantModel");
 
 
 const planSchema = mongoose.Schema({
@@ -40,6 +41,11 @@ const menuSchema = new mongoose.Schema({
       ref:'Tiffin',
       unique:true
   },
+  merchant:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref: Merchant
+  },
+
   plan:{
       veg_plan:{
           plan1:[planSchema],

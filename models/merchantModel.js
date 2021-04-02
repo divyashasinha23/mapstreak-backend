@@ -32,6 +32,12 @@ const merchantSchema = new mongoose.Schema
     confirmPassword:{
         type: String,
         // required: [true, 'Please enter a password'],
+    },
+    image:{
+        type: String
+    },
+    location:{
+        
     }
 
 });

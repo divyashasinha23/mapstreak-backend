@@ -193,33 +193,33 @@ catch(err){
 
 //update-profile
 
-    module.exports.update_profile = async(req,res) => {
-      try{
-      const {newname} = req.body; 
-      const {newemail} = req.body;
-      const {newMobileNumber} = req.body;
-      const {image} = req.body;
+    // module.exports.update_profile = async(req,res) => {
+    //   try{
+    //   const {newname} = req.body; 
+    //   const {newemail} = req.body;
+    //   const {newMobileNumber} = req.body;
+    //   const {image} = req.body;
 
 
-      await User.findOneAndUpdate({_id: res.locals.user._id}, {
-        name: newname,
-        email:newemail,
-        mobile_no: newMobileNumber,
-        image: image
-      })
+    //   await User.findOneAndUpdate({_id: res.locals.user._id}, {
+    //     name: newname,
+    //     email:newemail,
+    //     mobile_no: newMobileNumber,
+    //     image: image
+    //   })
   
-      res.json({
-        name: newname,
-        email: newemail,
-        mobile_no: newMobileNumber,
-        image: image,
-        msg:"profile updated successfully"
-      });
-    }
-    catch(err){
-      console.log(err);
-    }
-    }  
+    //   res.json({
+    //     name: newname,
+    //     email: newemail,
+    //     mobile_no: newMobileNumber,
+    //     image: image,
+    //     msg:"profile updated successfully"
+    //   });
+    // }
+    // catch(err){
+    //   console.log(err);
+    // }
+    // }  
 
     // module.exports.update_profile_by_id = async(req,res) => {
     //   try{
@@ -264,7 +264,8 @@ catch(err){
           name: user.name,
           email: user.email,
           mobile_no: user.mobile_no,
-          image: user.image
+          image: user.image,
+          location: user.location
         });
       } else {
         res.status(404);
@@ -278,27 +279,27 @@ catch(err){
 
 //get-profile by id
 
-    module.exports.get_profile_by_id = async (req, res) => {
-      try{
-      const user = await User.findById(req.params.id);
+    // module.exports.get_profile_by_id = async (req, res) => {
+    //   try{
+    //   const user = await User.findById(req.params.id);
     
-      if (user) {
-        res.json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          mobile_no: user.mobile_no,
-          image: user.image
-        });
-      } else {
-        res.status(404);
-        throw new Error('user not found');
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-    };
+    //   if (user) {
+    //     res.json({
+    //       _id: user._id,
+    //       name: user.name,
+    //       email: user.email,
+    //       mobile_no: user.mobile_no,
+    //       image: user.image
+    //     });
+    //   } else {
+    //     res.status(404);
+    //     throw new Error('user not found');
+    //   }
+    // }
+    // catch(err){
+    //   console.log(err);
+    // }
+    // };
 
  
 

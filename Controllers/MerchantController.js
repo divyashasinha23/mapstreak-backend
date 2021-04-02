@@ -112,32 +112,8 @@ module.exports.merchant_post_login = async (req,res) => {
 }
 
 
-//update-profile
 
-module.exports.update_profile = async(req,res) => {
-  try{
-  const {newemail} = req.body;
-  const {newMobileNumber} = req.body;
-  const {image} = req.body;
 
-  await Merchant.findOneAndUpdate({_id: res.locals.merchant._id}, {
-    email:newemail,
-    mobile_no: newMobileNumber,
-    image: image
-  })
-
-  res.json({
-    email: newemail,
-    mobile_no: newMobileNumber,
-    image: image
-  });
-}
-catch(err){
-  console.log(err);
-}
-}  
-
-//
 
 module.exports.get_profile = async (req, res) => {
   try{
@@ -148,9 +124,10 @@ module.exports.get_profile = async (req, res) => {
       full_name: merchant.full_name,
       address: merchant.address,
       mobile_no:merchant.mobile_no,
-      email: merchnat.email,
-      password: merchant.password,
-      confirmPassword:merchant.confirmPassword
+      email: merchant.email,
+      image: merchant.image,
+      location:merchant.location
+      
     });
   } else {
     res.status(404);

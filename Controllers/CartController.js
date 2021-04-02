@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
 const Cart = require('../models/CartModel');
+const User = require('../models/User');
 
 module.exports.post_addToCart= async(req,res) => {
     try{
+      const user = await User.find({_id: res.locals.user});
+      if(user){
       const addtocart = await Cart.create(req.body);
        res.status(201).json({
          success:true,
          data:addtocart,
        });
+      }
+      else{
+        res.status(200).json({
+          msg: "Please login to add items in cart"
+        })
+      }
     }
         
     catch(err){
@@ -20,11 +29,17 @@ module.exports.post_addToCart= async(req,res) => {
 
     module.exports.get_cart_details_by_id=async(req,res,next)=>{
         try{
-            const users_addToCart=await Cart.find({user:req.params.id},{plan:1,extras:1,tiffinservice:1,totalPrice:1})
-                if(users_addToCart){
+            const users_addToCart= await Cart.find({user: res.locals.user},{plan:1,extras:1,tiffinservice:1,totalPrice:1},
+              {sort : {createdAt: -1}})
+                if(users_addToCart.length !== 0){
                     res.status(201).json({
                        users_addToCart
                      });
+                }
+                else{
+                  res.status(200).json({
+                    msg: 'No Items Added yet'
+                  })
                 }
         }
         catch(err){
