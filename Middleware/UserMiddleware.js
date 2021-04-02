@@ -7,7 +7,7 @@ const requireAuth = (req,res,next) => {
     if(token){
         jwt.verify(token, 'mapstreak', (err,decodedToken) => {
             if(err){
-                res.redirect('/login');
+                res.send('Your are not logged in')
             }
             else{
                 console.log(decodedToken)
@@ -16,7 +16,7 @@ const requireAuth = (req,res,next) => {
         });
     }
     else{
-        res.redirect('/login');
+        res.send('Your are not logged in')
     }
 };
 
