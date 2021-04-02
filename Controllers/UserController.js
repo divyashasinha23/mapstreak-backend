@@ -15,7 +15,7 @@ mongoose.set('useUnifiedTopology', true);
 //create token
 const maxAge = 1 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
-    return jwt.sign({id}, 'mapstreak', {
+    return jwt.sign({id}, process.env.MAPSTREAK_USER, {
     expiresIn: maxAge,
     });
 };
@@ -65,7 +65,7 @@ module.exports.post_signup = async(req,res)=>
   try{
        const user=await User.create({name,email,password,mobile_no,image});
        const token =createToken(user._id);
-       res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
+      //  res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
        if(user){
          res.status(201);
          res.json({
@@ -103,7 +103,7 @@ module.exports.post_login = async (req,res) => {
     try{
       const user = await User.login(username,password);
       const token = createToken(user._id);
-      res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
+      // res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
        res.status(201).json({
          _id : user._id,
          password: user.password,
@@ -175,9 +175,9 @@ module.exports.post_resetpassword = async(req,res) => {
   try{
   const {newPassword} = req.body;
   const passwordHash = await bcrypt.hash(newPassword, 12)
-console.log(newPassword);
-console.log(res.locals.user);  
-  await User.findOneAndUpdate({_id: res.locals.user._id},{
+// console.log(newPassword);
+// console.log(res.locals.user);  
+  await User.findOneAndUpdate({_id: req.user._id},{
     password: passwordHash
   });
   res.json({
@@ -256,7 +256,7 @@ catch(err){
 
     module.exports.get_profile = async (req, res) => {
       try{
-      const user = await User.findById(res.locals.user);
+      const user = await User.findById(req.user);
     
       if (user) {
         res.json({

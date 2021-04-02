@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../Controllers/UserController');
-const {requireAuth, current_User} = require('../Middleware/UserMiddleware');
+const Auth = require('../Middleware/UserMiddleware');
 const Upload = require('../Middleware/upload');
 const User = require('../models/User');
 
@@ -10,15 +10,15 @@ router.post('/login',UserController.post_login);
 router.post('/signup',UserController.post_signup);
 
 //view profile of user
-router.get('/profile',current_User);
-router.get('/profile',requireAuth,UserController.get_profile);
+
+router.get('/profile',Auth,UserController.get_profile);
 // router.get('/profile/:id', UserController.get_profile_by_id);
 
 //update user profile
-router.post('/update-profile', current_User);
+// router.post('/update-profile', current_User);
 // router.post('/update-profile', requireAuth, UserController.update_profile);
 
-router.post('/update-profile', requireAuth,   (req,res) => {
+router.post('/update-profile', Auth,   (req,res) => {
    Upload(req,res, (error => {
    if(error){
        console.log(error);
@@ -72,8 +72,7 @@ router.post('/update-profile', requireAuth,   (req,res) => {
 
 
 router.post('/forgot-password',UserController.post_forgotpassword);
-router.post('/reset-password',current_User);
-router.post('/reset-password', requireAuth, UserController.post_resetpassword);
+router.post('/reset-password', Auth, UserController.post_resetpassword);
 
 
 

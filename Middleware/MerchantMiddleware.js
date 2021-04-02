@@ -1,48 +1,30 @@
 
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 const Merchant = require('../models/merchantModel');
 
-const Auth = (req,res,next) => {
-    const token = req.cookies.jwt;
-    if(token){
-        jwt.verify(token, 'mapstreak-merchant', (err,decodedToken) => {
-            if(err){
-                // res.redirect('/merchant_signup');
-                res.send('Your are not logged in')
-            }
-            else{
-                console.log(decodedToken)
-                next();
-            }
-        });
+// json web token is verified
+const require_Auth = asyncHandler(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  )
+    try {
+      token = req.headers.authorization.split(' ')[1].toString();
+      const decodedToken = jwt.verify(token, process.env.MERCHANT_KEY);
+      req.merchant = await Merchant.findById(decodedToken.id).select('-password');
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401);
+      throw new Error('not authorized, no token');
     }
-    else{
-        // res.redirect('/merchant_signup');
-        res.send('Your are not logged in')
-    }
-};
-
-
-const currentMerchant = (req,res,next) => {
-  const token = req.cookies.jwt;
-  if(token){
-      jwt.verify(token,'mapstreak-merchant', async (err, decodedToken) => {
-          if(err){
-              console.log(err.message);
-              res.locals.merchant = null;
-              next();
-          } else{
-              console.log(decodedToken);
-              let merchant = await Merchant.findById(decodedToken.id);
-              res.locals.merchant = merchant;
-              next();
-          }
-      });
+  if (!token) {
+    res.status(401);
+    throw new Error('not authorized, no token');
   }
-  else{
-     res.locals.merchant = null;
-     next();
-  }
-}
+});
 
-module.exports = {Auth, currentMerchant};
+module.exports = require_Auth;
+

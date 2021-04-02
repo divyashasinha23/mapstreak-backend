@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MerchantController = require('../Controllers/MerchantController');
-const {Auth,currentMerchant} = require('../Middleware/MerchantMiddleware');
+const require_Auth = require('../Middleware/MerchantMiddleware');
 const MerchantOrderController = require('../Controllers/MerchantOrderController');
 const Upload = require('../Middleware/upload');
 const Merchant = require('../models/merchantModel');
@@ -11,12 +11,11 @@ router.post('/merchant_login',MerchantController.merchant_post_login);
 router.post('/merchant_signup',MerchantController.merchant_post_signup);
 
 // view profile of merchant
-router.get('/profile',currentMerchant);
-router.get('/profile',Auth, MerchantController.get_profile);
+router.get('/profile',require_Auth, MerchantController.get_profile);
 
 //update profile of merchant
-router.post('/update-profile', currentMerchant);
-router.post('/update-profile',Auth, (req,res) => {
+
+router.post('/update-profile',require_Auth, (req,res) => {
     Upload(req,res, (error => {
         if(error){
             console.log(error)
@@ -29,7 +28,7 @@ router.post('/update-profile',Auth, (req,res) => {
                     mobile_no: req.body.mobile_no,
                     email: req.body.email,
                 }
-                Merchant.findByIdAndUpdate({_id: res.locals.merchant}, obj, (err, item) => {
+                Merchant.findByIdAndUpdate({_id: req.user._id}, obj, (err, item) => {
                     if(err){
                         console.log(err);
                     }
@@ -56,8 +55,7 @@ router.post('/update-profile',Auth, (req,res) => {
 });
 
 //All orders till now by customers(Not completed yet!)
-router.get('/orders',currentMerchant);
-router.get('/orders',Auth, MerchantOrderController.get_orders);
+router.get('/orders',require_Auth, MerchantOrderController.get_orders);
 
 
 module.exports = router;

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const OrderController = require('../Controllers/OrderController');
-const {requireAuth, current_User} = require('../Middleware/UserMiddleware');
+const Auth = require('../Middleware/UserMiddleware');
 
-router.post('/place_order', current_User);
-router.post('/place_order', requireAuth, OrderController.post_order);
+
+router.post('/place_order', Auth, OrderController.post_order);
 
 
 // router.get('/get-order-details',current_User);
