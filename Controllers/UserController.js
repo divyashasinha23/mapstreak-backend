@@ -265,7 +265,8 @@ catch(err){
           email: user.email,
           mobile_no: user.mobile_no,
           image: user.image,
-          location: user.location
+          location: user.location,
+          token: createToken(user._id)
         });
       } else {
         res.status(404);
