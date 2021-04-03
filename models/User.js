@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema
     },
     mobile_no:{
         type:String,
+        default: "",
+        unique: true
     },
     email:{
         type: String,
@@ -24,9 +26,10 @@ const userSchema = new mongoose.Schema
     },
     image:{
       type: String,
+      default: "",
     },
     location:{
-      
+      default: "",
     },
 
     uid:String,
