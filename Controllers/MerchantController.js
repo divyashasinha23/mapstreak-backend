@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 //create token
 const maxAge = 1 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
-    return jwt.sign({id}, 'mapstreak-merchant', {
+    return jwt.sign({id}, process.env.MERCHANT_KEY, {
     expiresIn: maxAge,
     });
 };
@@ -62,7 +62,7 @@ module.exports.merchant_post_signup = async(req,res)=>
       if(password == confirmPassword){
        const merchant= await Merchant.create({full_name,address,email,password,mobile_no,confirmPassword});
        const token  = createToken(merchant._id);
-       res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 });
+      //  res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 });
          res.status(201);
          res.json({
           _id:merchant._id,
@@ -97,7 +97,7 @@ module.exports.merchant_post_login = async (req,res) => {
   try{
     const merchant = await Merchant.login(mobile_no,password);
     const token = createToken(merchant._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
+    // res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
      res.status(201).json({
        _id : merchant._id,
        password: merchant.password,
@@ -117,7 +117,7 @@ module.exports.merchant_post_login = async (req,res) => {
 
 module.exports.get_profile = async (req, res) => {
   try{
-  const merchant = await Merchant.findById(res.locals.merchant);
+  const merchant = await Merchant.findById(req.merchant._id);
 
   if (this.merchant_post_login) {
     res.json({

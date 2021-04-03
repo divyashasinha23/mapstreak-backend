@@ -2,7 +2,7 @@
 //All updates are done by Merchant
 
 const express = require('express');
-const { Auth,currentMerchant } = require('../Middleware/MerchantMiddleware');
+const require_Auth = require('../Middleware/MerchantMiddleware');
 const Upload = require('../Middleware/upload');
 const Tiffin = require('../models/tiffinServiceModel');
 const Merchant = require('../models/merchantModel');
@@ -12,11 +12,11 @@ const router = express.Router();
 // Updates can be performed by merchant or Admin
 
 
-router.post('/update-tiffin-service/:id', currentMerchant);
+
 //update by tiffinservice id
-router.post('/update-tiffin-service/:id', Auth, async (req,res) => {
+router.post('/update-tiffin-service/:id', require_Auth, async (req,res) => {
     try{
-    const user = await Merchant.findById(res.locals.merchant);
+    const user = await Merchant.findById(req.merchant);
     Upload(req,res, (error => {
     if(error){
         console.log(error);
@@ -83,7 +83,7 @@ catch(err){
     console.log(err);
 }
 });
-router.get('/delete-tiffin-service/:id', currentMerchant);
-router.get('/delete-tiffin-service/:id', Auth, UpdateController.delete_tiffin_service);
+
+router.get('/delete-tiffin-service/:id', require_Auth, UpdateController.delete_tiffin_service);
 
 module.exports = router;

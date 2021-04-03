@@ -1,47 +1,29 @@
 
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
 
-const requireAuth = (req,res,next) => {
-    const token = req.cookies.jwt;
-    if(token){
-        jwt.verify(token, 'mapstreak', (err,decodedToken) => {
-            if(err){
-                res.send('Your are not logged in')
-            }
-            else{
-                console.log(decodedToken)
-                next();
-            }
-        });
+// json web token is verified
+const Auth = asyncHandler(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  )
+    try {
+      token = req.headers.authorization.split(' ')[1].toString();
+      const decodedToken = jwt.verify(token, process.env.MAPSTREAK_USER);
+      req.user = await User.findById(decodedToken.id).select('-password');
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401);
+      throw new Error('not authorized, no token');
     }
-    else{
-        res.send('Your are not logged in')
-    }
-};
-
-
-const current_User = (req,res,next) => {
-    const token = req.cookies.jwt;
-    if(token){
-        jwt.verify(token,'mapstreak', async (err, decodedToken) => {
-            if(err){
-                console.log(err.message);
-                res.locals.user = null;
-                next();
-            } else{
-                console.log(decodedToken);
-                let user = await User.findById(decodedToken.id);
-                res.locals.user = user;
-                next();
-            }
-        });
-    }
-    else{
-       res.locals.user = null;
-       next();
-    }
+  if (!token) {
+    res.status(401);
+    throw new Error('not authorized, no token');
   }
-  
+});
 
-module.exports = {requireAuth, current_User} ;
+module.exports = Auth;

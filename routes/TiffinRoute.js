@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const TiffinContoller = require('../Controllers/TiffinController');
-const {Auth, currentMerchant} = require('../Middleware/MerchantMiddleware');
+const require_Auth = require('../Middleware/MerchantMiddleware');
 const Upload = require('../Middleware/upload');
 const Merchant = require('../models/merchantModel');
 const Tiffin = require('../models/tiffinServiceModel');
@@ -9,10 +9,9 @@ const Tiffin = require('../models/tiffinServiceModel');
 
 
 //Merchant can post a tiffinservice
-router.get('/Tiffin-service', currentMerchant);
-router.get('/Tiffin-service', Auth, async(res,req)=> {
+router.get('/Tiffin-service', require_Auth, async(res,req)=> {
      try{
-        const user = await Merchant.findById(res.locals.merchant);
+        const user = await Merchant.findById(req.merchant);
         if(user){
            const all_tiffin_services = await Tiffin.find(user);
            if(all_tiffin_services !== 0){
@@ -34,10 +33,11 @@ router.get('/Tiffin-service', Auth, async(res,req)=> {
          console.log(err);
      }
 });
-router.post('/add-Tiffin-service', currentMerchant);
-router.post('/add-Tiffin-service' , Auth, async(req,res) => {
+
+router.post('/add-Tiffin-service' , require_Auth, async(req,res) => {
     try{
-    const user = await Merchant.findById(res.locals.merchant);
+        
+    const user = await Merchant.findById(req.merchant._id);
      if(user){
         Upload(req,res, (error => {
             if(error){

@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 module.exports.post_addToCart= async(req,res) => {
     try{
-      const user = await User.find({_id: res.locals.user});
+      const user = await User.find(req.user._id);
       if(user){
       const addtocart = await Cart.create(req.body);
        res.status(201).json({
@@ -29,7 +29,8 @@ module.exports.post_addToCart= async(req,res) => {
 
     module.exports.get_cart_details_by_id=async(req,res,next)=>{
         try{
-            const users_addToCart= await Cart.find({user: res.locals.user},{plan:1,extras:1,tiffinservice:1,totalPrice:1},
+          console.log(req.user._id);
+            const users_addToCart= await Cart.find({user: req.user._id},{plan:1,extras:1,tiffinservice:1,totalPrice:1},
               {sort : {createdAt: -1}})
                 if(users_addToCart.length !== 0){
                     res.status(201).json({
