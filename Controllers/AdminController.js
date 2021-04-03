@@ -7,7 +7,7 @@ const Tiffin = require('../models/tiffinServiceModel');
 //create token
 const maxAge = 1 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
-    return jwt.sign({id}, 'mapstreak-admin', {
+    return jwt.sign({id}, process.env.MAPSTREAK_ADMIN, {
     expiresIn: maxAge,
     });
 };
@@ -56,7 +56,7 @@ module.exports.admin_post_signup= async(req,res)=>
   try{
        const admin=await Admin.create({name,email,password,mobile_no});
        const token =createToken(admin._id);
-       res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
+      //  res.cookie('jwt',token,{ httpOnly: true, maxAge: maxAge * 1000 })
        if(admin){
          res.status(201);
          res.json({
@@ -93,7 +93,7 @@ module.exports.admin_post_login = async (req,res) => {
     try{
       const admin = await Admin.login(adminname,password);
       const token = createToken(admin._id);
-      res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
+      // res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000});
        res.status(201).json({
          _id : admin._id,
          password: admin.password,
@@ -144,7 +144,7 @@ module.exports.admin_post_login = async (req,res) => {
   
   module.exports.admin_get_profile= async (req, res) => {
     try{
-    const admin = await Admin.findById(res.locals.admin);
+    const admin = await Admin.findById(req.admin._id);
   
     if (admin) {
       res.json({
